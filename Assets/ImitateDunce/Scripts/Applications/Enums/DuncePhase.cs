@@ -4,11 +4,9 @@ namespace ImitateDunce.Applications.Enums
 {
     public enum DuncePhase
     {
-        EnemyDunce,
-        EnemyDemo,
-        EnemyToPlayer,
-        PlayerDunce,
-        PlayerDemo,
+        Dunce,
+        Demo,
+        TurnChange,
     }
 
     public static class DuncePhaseExtension
@@ -16,7 +14,7 @@ namespace ImitateDunce.Applications.Enums
         public static DuncePhase Next(this DuncePhase self)
         {
             var o = self + 1;
-            return Enum.IsDefined(typeof(DuncePhase), o) ? o : DuncePhase.EnemyDunce;
+            return Enum.IsDefined(typeof(DuncePhase), o) ? o : DuncePhase.Dunce;
         }
     }
 }

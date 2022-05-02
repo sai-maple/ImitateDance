@@ -9,6 +9,7 @@ namespace ImitateDunce.Applications.Installer.Core
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<PhaseEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<ScoreEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }
     }
 }
