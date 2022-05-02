@@ -10,6 +10,7 @@ namespace ImitateDunce.Applications.Installer.Core
         {
             builder.Register<PhaseEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<ScoreEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<TimeEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }
     }
 }
