@@ -1,4 +1,5 @@
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using ImitateDunce.Applications.Enums;
 using ImitateDunce.Domain.Entity.Game.Core;
 
@@ -45,7 +46,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         }
 
         // TurnChangeの後呼ばれる
-        public async void OnDunce(CancellationToken token)
+        public async UniTask OnDunce(CancellationToken token)
         {
             await _timeEntity.DunceAsync(_musicEntity.DunceTime, token);
             if (token.IsCancellationRequested) return;
@@ -66,7 +67,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         }
 
         // Audienceの後呼ばれる
-        public async void OnDemo(CancellationToken token)
+        public async UniTask OnDemo(CancellationToken token)
         {
             await _timeEntity.DunceAsync(_musicEntity.DunceTime, token);
             if (token.IsCancellationRequested) return;
