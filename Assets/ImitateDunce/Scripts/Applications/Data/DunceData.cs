@@ -5,16 +5,17 @@ namespace ImitateDunce.Applications.Data
     public sealed class DunceData
     {
         public int Beat { get; }
-        public Dunce Demo { get; }
-        public Dunce Dunce { get; }
+        public DunceDirection Demo { get; }
+        public DunceDirection Dunce { get; }
+        public bool IsSuccess => Demo == Dunce;
 
-        public DunceData(int beat, Dunce dunce)
+        public DunceData(int beat, DunceDirection dunce)
         {
             Beat = beat;
             Dunce = dunce;
         }
 
-        public DunceData(int beat, Dunce demo, Dunce dunce)
+        public DunceData(int beat, DunceDirection demo, DunceDirection dunce)
         {
             Beat = beat;
             Demo = demo;

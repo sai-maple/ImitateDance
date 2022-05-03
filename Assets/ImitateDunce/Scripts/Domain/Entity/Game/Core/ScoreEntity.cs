@@ -10,15 +10,15 @@ namespace ImitateDunce.Domain.Entity.Game.Core
     public sealed class ScoreEntity : IDisposable
     {
         private readonly Subject<DunceData> _subject = default;
-        private readonly Dictionary<int, Dunce> _demo = default;
-        private readonly Dictionary<int, Dunce> _dunce = default;
+        private readonly Dictionary<int, DunceDirection> _demo = default;
+        private readonly Dictionary<int, DunceDirection> _dunce = default;
         private ScoreDto _score = default;
 
         public ScoreEntity()
         {
             _subject = new Subject<DunceData>();
-            _demo = new Dictionary<int, Dunce>();
-            _dunce = new Dictionary<int, Dunce>();
+            _demo = new Dictionary<int, DunceDirection>();
+            _dunce = new Dictionary<int, DunceDirection>();
         }
 
         // タップしたタイミングのNoteを返す
@@ -36,7 +36,7 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         }
 
         // 閾値以内のnoteに入力した方向をセットする
-        public void OnDemo(float time, Dunce demo)
+        public void OnDemo(float time, DunceDirection demo)
         {
             foreach (var note in _score.Score)
             {
@@ -49,7 +49,7 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         }
 
         // 閾値以内のnoteに入力した方向をセットして得点を返す
-        public int OnDunce(float time, Dunce dunce)
+        public int OnDunce(float time, DunceDirection dunceDirection)
         {
             var point = 0;
             foreach (var note in _score.Score)
@@ -57,9 +57,9 @@ namespace ImitateDunce.Domain.Entity.Game.Core
                 // todo threshold and point
                 if (Mathf.Abs(note.Time - time) > 0.1f) continue;
                 if (_dunce.ContainsKey(note.Beat)) continue;
-                _dunce.Add(note.Beat, dunce);
-                var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : Dunce.Non;
-                _subject.OnNext(new DunceData(note.Beat, demo, dunce));
+                _dunce.Add(note.Beat, dunceDirection);
+                var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DunceDirection.Non;
+                _subject.OnNext(new DunceData(note.Beat, demo, dunceDirection));
                 break;
             }
 
@@ -70,7 +70,7 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         {
             foreach (var note in _score.Score)
             {
-                var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : Dunce.Non;
+                var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DunceDirection.Non;
                 if (!_dunce.ContainsKey(note.Beat)) return false;
                 if (demo != _dunce[note.Beat]) return false;
             }
