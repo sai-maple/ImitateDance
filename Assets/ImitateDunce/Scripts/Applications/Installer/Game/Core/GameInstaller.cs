@@ -2,7 +2,7 @@ using ImitateDunce.Domain.Entity.Game.Core;
 using VContainer;
 using VContainer.Unity;
 
-namespace ImitateDunce.Applications.Installer.Core
+namespace ImitateDunce.Applications.Installer.Game.Core
 {
     public sealed class GameInstaller : LifetimeScope
     {
