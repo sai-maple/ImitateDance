@@ -13,6 +13,7 @@ namespace ImitateDunce.Applications.Installer.Game.Core
             builder.Register<TimeEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<SpeedEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<TurnPlayerEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<MusicEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }
     }
 }

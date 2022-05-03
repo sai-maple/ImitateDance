@@ -6,19 +6,11 @@ namespace ImitateDunce.Domain.Entity.Game.Core
 {
     public sealed class TimeEntity
     {
-        // todo limit と　Audienceの時間を曲選択時に計算する
         public float Time { get; private set; }
-        public float Limit { get; private set; }
 
-        public void Initialize()
-        {
-            
-        }
-        
         public async UniTask DunceAsync(float limit, CancellationToken token)
         {
             Time = 0;
-            Limit = limit;
             while (true)
             {
                 await UniTask.Yield(PlayerLoopTiming.FixedUpdate, token);
@@ -27,11 +19,12 @@ namespace ImitateDunce.Domain.Entity.Game.Core
             }
         }
 
-        public async UniTask AudienceAsync(CancellationToken token)
+        public async UniTask AudienceAsync(float time, CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(time), cancellationToken: token);
         }
 
+        // delta time * speed 
         public void FixUpdate(float deltaTime)
         {
             Time += deltaTime;

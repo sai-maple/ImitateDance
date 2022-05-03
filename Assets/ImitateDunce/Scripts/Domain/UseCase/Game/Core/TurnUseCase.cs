@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading;
-using Cysharp.Threading.Tasks;
 using ImitateDunce.Applications.Data;
 using ImitateDunce.Applications.Enums;
 using ImitateDunce.Domain.Entity.Game.Core;
@@ -13,6 +12,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         private readonly ScoreEntity _scoreEntity = default;
         private readonly SpeedEntity _speedEntity = default;
         private readonly TimeEntity _timeEntity = default;
+        private readonly MusicEntity _musicEntity = default;
         private readonly TurnPlayerEntity _turnPlayerEntity = default;
 
         // todo 楽譜のロード
@@ -31,8 +31,6 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         public void GameStart()
         {
             _turnPlayerEntity.GameStart();
-            // todo
-            _scoreEntity.SetScore(new ScoreDto(new List<NoteDto>()));
             _phaseEntity.GameStart();
         }
 
@@ -42,7 +40,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
             // パーフェクトのスコア計算
             _scoreEntity.IsPerfect();
             _turnPlayerEntity.NextTurn();
-            await _timeEntity.AudienceAsync(token);
+            await _timeEntity.AudienceAsync(_musicEntity.AudienceTime, token);
             if (token.IsCancellationRequested) return;
             _phaseEntity.Next(DuncePhase.Dunce);
         }
@@ -50,7 +48,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         // TurnChangeの後呼ばれる
         public async void OnDunce(CancellationToken token)
         {
-            await _timeEntity.DunceAsync(10f, token);
+            await _timeEntity.DunceAsync(_musicEntity.DunceTime, token);
             if (token.IsCancellationRequested) return;
             _phaseEntity.Next(DuncePhase.Audience);
         }
@@ -58,11 +56,12 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         // Dunceの後に呼ばれる
         public async void OnAudience(CancellationToken token)
         {
-            _scoreEntity.SetScore(new ScoreDto(new List<NoteDto>()));
-            // todo 終了判定
+            // 譜面の最後に到達したら終了
+            if (!_musicEntity.TryNext()) return;
+            _scoreEntity.SetScore(_musicEntity.Score);
             // 偶数の時呼ぶ
             // _speedEntity.SpeedUp();
-            await _timeEntity.AudienceAsync(token);
+            await _timeEntity.AudienceAsync(_musicEntity.AudienceTime, token);
             if (token.IsCancellationRequested) return;
             _phaseEntity.Next(DuncePhase.Demo);
         }
@@ -70,7 +69,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         // Audienceの後呼ばれる
         public async void OnDemo(CancellationToken token)
         {
-            await _timeEntity.DunceAsync(10f, token);
+            await _timeEntity.DunceAsync(_musicEntity.DunceTime, token);
             if (token.IsCancellationRequested) return;
             _phaseEntity.Next(DuncePhase.TurnChange);
         }
