@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ImitateDunce.Applications.Data;
 using ImitateDunce.Applications.Enums;
 using UniRx;
+using UnityEngine;
 
 namespace ImitateDunce.Domain.Entity
 {
@@ -37,7 +38,7 @@ namespace ImitateDunce.Domain.Entity
         {
             foreach (var note in _score.Score)
             {
-                if (MathF.Abs(note.Time - time) > 0.1f) continue;
+                if (Mathf.Abs(note.Time - time) > 0.1f) continue;
                 if (_demo.ContainsKey(note.Beat)) continue;
                 _demo.Add(note.Beat, demo);
                 _subject.OnNext(new DunceData(note.Beat, demo));
@@ -52,7 +53,7 @@ namespace ImitateDunce.Domain.Entity
             foreach (var note in _score.Score)
             {
                 // todo threshold and point
-                if (MathF.Abs(note.Time - time) > 0.1f) continue;
+                if (Mathf.Abs(note.Time - time) > 0.1f) continue;
                 if (_dunce.ContainsKey(note.Beat)) continue;
                 _dunce.Add(note.Beat, dunce);
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : Dunce.Non;
