@@ -1,7 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 
-namespace ImitateDunce.Domain.Entity
+namespace ImitateDunce.Domain.Entity.Game.Core
 {
     public sealed class TimeEntity
     {

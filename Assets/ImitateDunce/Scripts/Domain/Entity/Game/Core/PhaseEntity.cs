@@ -2,7 +2,7 @@ using System;
 using ImitateDunce.Applications.Enums;
 using UniRx;
 
-namespace ImitateDunce.Domain.Entity
+namespace ImitateDunce.Domain.Entity.Game.Core
 {
     public class PhaseEntity : IDisposable
     {

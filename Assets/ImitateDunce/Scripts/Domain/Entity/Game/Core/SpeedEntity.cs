@@ -2,7 +2,7 @@ using System;
 using UniRx;
 using UnityEngine;
 
-namespace ImitateDunce.Domain.Entity
+namespace ImitateDunce.Domain.Entity.Game.Core
 {
     public sealed class SpeedEntity : IDisposable
     {
