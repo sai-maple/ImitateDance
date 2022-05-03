@@ -21,12 +21,12 @@ namespace ImitateDunce.Domain.Entity.Game.Core
 
         public void GameStart()
         {
-            Current = DuncePhase.TurnChange;
+            Current = DuncePhase.Audience;
         }
 
-        public void Next()
+        public void Next(DuncePhase phase)
         {
-            Current = Current.Next();
+            Current = phase;
             _subject.OnNext(Current);
         }
 

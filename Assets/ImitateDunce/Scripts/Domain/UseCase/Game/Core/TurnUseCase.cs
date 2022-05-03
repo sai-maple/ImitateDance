@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using ImitateDunce.Applications.Data;
+using ImitateDunce.Applications.Enums;
 using ImitateDunce.Domain.Entity.Game.Core;
 
 namespace ImitateDunce.Domain.UseCase.Game.Core
@@ -9,6 +12,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         private readonly PhaseEntity _phaseEntity = default;
         private readonly ScoreEntity _scoreEntity = default;
         private readonly SpeedEntity _speedEntity = default;
+        private readonly TimeEntity _timeEntity = default;
         private readonly TurnPlayerEntity _turnPlayerEntity = default;
 
         // todo 楽譜のロード
@@ -23,6 +27,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         }
 
         // ゲーム開始時にTurnChangeの代わりに1度だけ呼ばれる
+        // Audienceを挟む都合1拍遅れるので曲もずらす
         public void GameStart()
         {
             _turnPlayerEntity.GameStart();
@@ -31,16 +36,43 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
             _phaseEntity.GameStart();
         }
 
-        // 曲の再生終わり(Timerのlimitで呼ばれる)
-        public void TurnChange()
+        // Demoの後,歓声+視点移動と同時に呼ばれる
+        public async void OnTurnChange(CancellationToken token)
         {
             // パーフェクトのスコア計算
             _scoreEntity.IsPerfect();
             _turnPlayerEntity.NextTurn();
+            await _timeEntity.AudienceAsync(token);
+            if (token.IsCancellationRequested) return;
+            _phaseEntity.Next(DuncePhase.Dunce);
+        }
+
+        // TurnChangeの後呼ばれる
+        public async void OnDunce(CancellationToken token)
+        {
+            await _timeEntity.DunceAsync(10f, token);
+            if (token.IsCancellationRequested) return;
+            _phaseEntity.Next(DuncePhase.Audience);
+        }
+
+        // Dunceの後に呼ばれる
+        public async void OnAudience(CancellationToken token)
+        {
             _scoreEntity.SetScore(new ScoreDto(new List<NoteDto>()));
-            _phaseEntity.Next();
+            // todo 終了判定
             // 偶数の時呼ぶ
             // _speedEntity.SpeedUp();
+            await _timeEntity.AudienceAsync(token);
+            if (token.IsCancellationRequested) return;
+            _phaseEntity.Next(DuncePhase.Demo);
+        }
+
+        // Audienceの後呼ばれる
+        public async void OnDemo(CancellationToken token)
+        {
+            await _timeEntity.DunceAsync(10f, token);
+            if (token.IsCancellationRequested) return;
+            _phaseEntity.Next(DuncePhase.TurnChange);
         }
     }
 }
