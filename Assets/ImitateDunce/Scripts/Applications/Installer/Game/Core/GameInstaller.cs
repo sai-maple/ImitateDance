@@ -1,4 +1,6 @@
 using ImitateDunce.Domain.Entity.Game.Core;
+using ImitateDunce.Domain.UseCase.Game.Core;
+using ImitateDunce.Presentation.Presenter.Game.Core;
 using VContainer;
 using VContainer.Unity;
 
@@ -15,6 +17,8 @@ namespace ImitateDunce.Applications.Installer.Game.Core
             builder.Register<TurnPlayerEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<MusicEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<PointEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<TurnUseCase>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.RegisterEntryPoint<TimePresenter>();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ImitateDunce.Domain.Entity.Game.Core
             {
                 await UniTask.Yield(PlayerLoopTiming.FixedUpdate, token);
                 if (token.IsCancellationRequested) return;
-                if (Time < limit) break;
+                if (Time > limit) break;
             }
         }
 

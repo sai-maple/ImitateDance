@@ -18,6 +18,13 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         public MusicEntity()
         {
             _subject = new Subject<Unit>();
+            _index = -1;
+            DunceTime = 1;
+            AudienceTime = 1;
+            _score = new List<ScoreDto>()
+            {
+                new ScoreDto(new List<NoteDto>())
+            };
         }
 
         public IObservable<Unit> OnFinishAsObservable()
@@ -30,13 +37,19 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         {
             // 最初Nextから呼ばれるので初期値は-1にする
             _index = -1;
+            DunceTime = 1;
+            AudienceTime = 1;
+            _score = new List<ScoreDto>()
+            {
+                new ScoreDto(new List<NoteDto>())
+            };
         }
 
         // 次のターンの譜面をセット
         public bool TryNext()
         {
             _index++;
-            return _index >= _score.Count;
+            return _index < _score.Count;
         }
 
         public void Dispose()

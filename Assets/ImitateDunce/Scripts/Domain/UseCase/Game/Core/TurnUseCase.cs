@@ -17,12 +17,15 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
 
         // todo 楽譜のロード
 
-        public TurnUseCase(PhaseEntity phaseEntity, ScoreEntity scoreEntity,
-            SpeedEntity speedEntity, TurnPlayerEntity turnPlayerEntity)
+        public TurnUseCase(PhaseEntity phaseEntity, ScoreEntity scoreEntity, SpeedEntity speedEntity,
+            TimeEntity timeEntity, MusicEntity musicEntity, PointEntity pointEntity, TurnPlayerEntity turnPlayerEntity)
         {
             _phaseEntity = phaseEntity;
             _scoreEntity = scoreEntity;
             _speedEntity = speedEntity;
+            _timeEntity = timeEntity;
+            _musicEntity = musicEntity;
+            _pointEntity = pointEntity;
             _turnPlayerEntity = turnPlayerEntity;
         }
 

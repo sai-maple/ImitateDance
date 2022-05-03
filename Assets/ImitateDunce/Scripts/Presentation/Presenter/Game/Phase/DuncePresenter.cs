@@ -6,9 +6,9 @@ using ImitateDunce.Domain.UseCase.Game.Core;
 using UniRx;
 using VContainer.Unity;
 
-namespace ImitateDunce.Presentation.Presenter.Game
+namespace ImitateDunce.Presentation.Presenter.Game.Phase
 {
-    public sealed class TurnChangePresenter : IInitializable, IDisposable
+    public sealed class DuncePresenter : IInitializable, IDisposable
     {
         private readonly PhaseEntity _phaseEntity = default;
         private readonly TurnUseCase _turnUseCase = default;
@@ -16,16 +16,29 @@ namespace ImitateDunce.Presentation.Presenter.Game
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
+        public DuncePresenter(PhaseEntity phaseEntity, TurnUseCase turnUseCase)
+        {
+            _phaseEntity = phaseEntity;
+            _turnUseCase = turnUseCase;
+        }
+
         public void Initialize()
         {
             _phaseEntity.OnChangeAsObservable()
-                .Where(phase => phase == DuncePhase.TurnChange)
+                .Where(phase => phase == DuncePhase.Dunce)
                 .Subscribe(_ =>
                 {
-                    // todo viewの状態変化, 歓声の再生
-                    _turnUseCase.OnTurnChange(_cancellationToken.Token);
+                    OnDunce();
                 })
                 .AddTo(_disposable);
+        }
+
+        private async void OnDunce()
+        {
+            // todo viewの状態変化
+            // demo の譜面を隠す
+            await _turnUseCase.OnDunce(_cancellationToken.Token);
+            // キャラの状態を元に戻す
         }
 
         public void Dispose()

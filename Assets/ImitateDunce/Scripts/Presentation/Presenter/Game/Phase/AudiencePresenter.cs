@@ -6,7 +6,7 @@ using ImitateDunce.Domain.UseCase.Game.Core;
 using UniRx;
 using VContainer.Unity;
 
-namespace ImitateDunce.Presentation.Presenter.Game
+namespace ImitateDunce.Presentation.Presenter.Game.Phase
 {
     public sealed class AudiencePresenter : IInitializable, IDisposable
     {
@@ -15,6 +15,12 @@ namespace ImitateDunce.Presentation.Presenter.Game
 
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
+
+        public AudiencePresenter(PhaseEntity phaseEntity, TurnUseCase turnUseCase)
+        {
+            _phaseEntity = phaseEntity;
+            _turnUseCase = turnUseCase;
+        }
 
         public void Initialize()
         {

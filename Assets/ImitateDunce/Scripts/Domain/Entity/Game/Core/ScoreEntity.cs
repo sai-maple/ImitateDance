@@ -17,6 +17,8 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         public ScoreEntity()
         {
             _subject = new Subject<DunceData>();
+            _demo = new Dictionary<int, Dunce>();
+            _dunce = new Dictionary<int, Dunce>();
         }
 
         // タップしたタイミングのNoteを返す

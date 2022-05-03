@@ -1,4 +1,5 @@
 using System;
+using ImitateDunce.Applications.Common;
 using ImitateDunce.Applications.Enums;
 using UniRx;
 
@@ -22,12 +23,15 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         public void GameStart()
         {
             Current = DuncePhase.Audience;
+            _subject.OnNext(Current);
+            Logger.Log(Current);
         }
 
         public void Next(DuncePhase phase)
         {
             Current = phase;
             _subject.OnNext(Current);
+            Logger.Log(phase);
         }
 
         public void Dispose()
