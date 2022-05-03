@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Threading;
-using ImitateDunce.Applications.Data;
 using ImitateDunce.Applications.Enums;
 using ImitateDunce.Domain.Entity.Game.Core;
 
@@ -13,6 +11,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         private readonly SpeedEntity _speedEntity = default;
         private readonly TimeEntity _timeEntity = default;
         private readonly MusicEntity _musicEntity = default;
+        private readonly PointEntity _pointEntity = default;
         private readonly TurnPlayerEntity _turnPlayerEntity = default;
 
         // todo 楽譜のロード
@@ -38,7 +37,7 @@ namespace ImitateDunce.Domain.UseCase.Game.Core
         public async void OnTurnChange(CancellationToken token)
         {
             // パーフェクトのスコア計算
-            _scoreEntity.IsPerfect();
+            _pointEntity.Bonus(_turnPlayerEntity.Current, _scoreEntity.IsPerfect());
             _turnPlayerEntity.NextTurn();
             await _timeEntity.AudienceAsync(_musicEntity.AudienceTime, token);
             if (token.IsCancellationRequested) return;
