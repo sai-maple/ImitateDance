@@ -3,6 +3,7 @@ using ImitateDunce.Applications.Enums;
 using ImitateDunce.Domain.Entity.Game.Core;
 using ImitateDunce.Domain.UseCase.Game.NoteLine;
 using ImitateDunce.Presentation.View;
+using ImitateDunce.Presentation.View.Game;
 using UniRx;
 using VContainer.Unity;
 

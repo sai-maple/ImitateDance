@@ -2,6 +2,7 @@ using ImitateDunce.Domain.Entity.Game.NoteLine;
 using ImitateDunce.Domain.UseCase.Game.NoteLine;
 using ImitateDunce.Presentation.Presenter.Game.UI;
 using ImitateDunce.Presentation.View;
+using ImitateDunce.Presentation.View.Game;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

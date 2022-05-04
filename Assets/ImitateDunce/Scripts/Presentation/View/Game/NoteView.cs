@@ -2,7 +2,7 @@ using ImitateDunce.Applications.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ImitateDunce.Presentation.View
+namespace ImitateDunce.Presentation.View.Game
 {
     public sealed class NoteView : MonoBehaviour
     {

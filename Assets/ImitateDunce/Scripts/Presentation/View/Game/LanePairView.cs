@@ -3,7 +3,7 @@ using ImitateDunce.Applications.Data;
 using ImitateDunce.Applications.Enums;
 using UnityEngine;
 
-namespace ImitateDunce.Presentation.View
+namespace ImitateDunce.Presentation.View.Game
 {
     public sealed class LanePairView : MonoBehaviour
     {
