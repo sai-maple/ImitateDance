@@ -13,6 +13,7 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         public PhaseEntity()
         {
             _subject = new Subject<DuncePhase>();
+            Current = DuncePhase.Audience;
         }
 
         public IObservable<DuncePhase> OnChangeAsObservable()

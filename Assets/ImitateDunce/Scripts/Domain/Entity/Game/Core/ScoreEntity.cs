@@ -10,6 +10,7 @@ namespace ImitateDunce.Domain.Entity.Game.Core
     public sealed class ScoreEntity : IDisposable
     {
         private readonly Subject<DunceData> _subject = default;
+        private readonly Subject<ScoreDto> _scoreSubject = default;
         private readonly Dictionary<int, DunceDirection> _demo = default;
         private readonly Dictionary<int, DunceDirection> _dunce = default;
         private ScoreDto _score = default;
@@ -17,8 +18,14 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         public ScoreEntity()
         {
             _subject = new Subject<DunceData>();
+            _scoreSubject = new Subject<ScoreDto>();
             _demo = new Dictionary<int, DunceDirection>();
             _dunce = new Dictionary<int, DunceDirection>();
+        }
+
+        public IObservable<ScoreDto> OnScoreAsObservable()
+        {
+            return _scoreSubject.Share();
         }
 
         // タップしたタイミングのNoteを返す
@@ -82,6 +89,8 @@ namespace ImitateDunce.Domain.Entity.Game.Core
         {
             _subject?.OnCompleted();
             _subject?.Dispose();
+            _scoreSubject?.OnCompleted();
+            _scoreSubject?.Dispose();
         }
     }
 }

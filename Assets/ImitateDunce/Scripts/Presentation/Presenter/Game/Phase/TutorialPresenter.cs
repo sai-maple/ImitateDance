@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using ImitateDunce.Domain.UseCase.Game.Core;
 using VContainer.Unity;
 
@@ -12,8 +14,10 @@ namespace ImitateDunce.Presentation.Presenter.Game.Phase
             _turnUseCase = turnUseCase;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
+            // tutorial
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
             // 十字キーでアタシのダンスについてきなさい的なセリフ
             // Tutorialの後に再生
             _turnUseCase.GameStart();

@@ -3,13 +3,13 @@ using ImitateDunce.Domain.Entity.Game.NoteLine;
 
 namespace ImitateDunce.Domain.UseCase.Game.NoteLine
 {
-    public sealed class LinePositionUseCase
+    public sealed class LanePositionUseCase
     {
         private readonly TimeEntity _timeEntity = default;
         private readonly MusicEntity _musicEntity = default;
         private readonly PositionEntity _positionEntity = default;
 
-        public LinePositionUseCase(TimeEntity timeEntity, MusicEntity musicEntity, PositionEntity positionEntity)
+        public LanePositionUseCase(TimeEntity timeEntity, MusicEntity musicEntity, PositionEntity positionEntity)
         {
             _timeEntity = timeEntity;
             _musicEntity = musicEntity;
