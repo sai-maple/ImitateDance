@@ -4,12 +4,11 @@ using VContainer.Unity;
 
 namespace ImitateDance.Scripts.Applications.Installer.Game.Phase
 {
-    public sealed class DemoPackage : LifetimeScope
+    public sealed class PhasePackage : LifetimeScope
     {
-        // todo View
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<DemoPresenter>();
+            builder.RegisterEntryPoint<PhasePresenter>();
         }
     }
 }

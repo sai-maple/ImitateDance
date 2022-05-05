@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace ImitateDance.Scripts.Presentation.Presenter.Game.Phase
 {
-    public sealed class AudiencePresenter : IInitializable, IDisposable
+    public sealed class PhasePresenter : IInitializable, IDisposable
     {
         private readonly PhaseEntity _phaseEntity = default;
         private readonly TurnUseCase _turnUseCase = default;
@@ -16,7 +16,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Phase
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public AudiencePresenter(PhaseEntity phaseEntity, TurnUseCase turnUseCase)
+        public PhasePresenter(PhaseEntity phaseEntity, TurnUseCase turnUseCase)
         {
             _phaseEntity = phaseEntity;
             _turnUseCase = turnUseCase;
@@ -26,13 +26,33 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Phase
         {
             _phaseEntity.OnChangeAsObservable()
                 .Where(phase => phase == DancePhase.Audience)
-                .Subscribe(_ =>
-                {
-                    // todo viewの状態変化, 歓声の再生
-                    // 譜面の再描画
-                    _turnUseCase.OnAudience(_cancellationToken.Token);
-                })
+                .Subscribe(_ => _turnUseCase.OnAudience(_cancellationToken.Token))
                 .AddTo(_disposable);
+
+            _phaseEntity.OnChangeAsObservable()
+                .Where(phase => phase == DancePhase.Dance)
+                .Subscribe(_ => OnDance())
+                .AddTo(_disposable);
+
+            _phaseEntity.OnChangeAsObservable()
+                .Where(phase => phase == DancePhase.Demo)
+                .Subscribe(_ => OnDemo())
+                .AddTo(_disposable);
+
+            _phaseEntity.OnChangeAsObservable()
+                .Where(phase => phase == DancePhase.TurnChange)
+                .Subscribe(_ => _turnUseCase.OnTurnChange(_cancellationToken.Token))
+                .AddTo(_disposable);
+        }
+
+        private async void OnDance()
+        {
+            await _turnUseCase.OnDance(_cancellationToken.Token);
+        }
+
+        private async void OnDemo()
+        {
+            await _turnUseCase.OnDemo(_cancellationToken.Token);
         }
 
         public void Dispose()
