@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 101442011032818999}
   - component: {fileID: 1336181536873547484}
   - component: {fileID: 6099295916542169251}
+  - component: {fileID: 4303959359463561365}
   m_Layer: 5
   m_Name: DifficultView
   m_TagString: Untagged
@@ -163,6 +164,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd4cafc3f9a942bda32c573a09ac0ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: ImitateDance.Scripts.Applications.Installer.Common.RootInstaller
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!114 &4303959359463561365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3239327980531802503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5060a0bfc12490e97e76e26567ca3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:

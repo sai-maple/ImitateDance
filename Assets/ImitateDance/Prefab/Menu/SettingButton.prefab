@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3269620909803051920}
   - component: {fileID: 7294449751031209024}
   - component: {fileID: 3810085061642786980}
+  - component: {fileID: 3223747041771314029}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -243,6 +244,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b01d0c546cd6462b8156603c4977b9e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: ImitateDance.Scripts.Applications.Installer.Common.RootInstaller
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!114 &3223747041771314029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7512137062580361804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5060a0bfc12490e97e76e26567ca3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
