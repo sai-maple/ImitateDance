@@ -1,3 +1,4 @@
+using ImitateDance.Scripts.Presentation.Presenter.Common;
 using ImitateDance.Scripts.Presentation.View.Common;
 using UnityEngine;
 using VContainer;
@@ -10,6 +11,7 @@ namespace ImitateDance.Scripts.Applications.Installer.Common
     {
         public override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterEntryPoint<BgmVolumePresenter>();
             builder.RegisterComponent(GetComponent<AudioView>());
         }
     }

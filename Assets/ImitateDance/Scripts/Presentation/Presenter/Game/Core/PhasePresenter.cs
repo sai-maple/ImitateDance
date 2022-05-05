@@ -1,23 +1,30 @@
 using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using ImitateDance.Scripts.Applications.Enums;
 using ImitateDance.Scripts.Domain.Entity.Game.Core;
 using ImitateDance.Scripts.Domain.UseCase.Game.Core;
 using UniRx;
+using UniScreen.Container;
 using VContainer.Unity;
 
 namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
 {
     public sealed class PhasePresenter : IInitializable, IDisposable
     {
+        private readonly ScreenContainer _screenContainer = default;
+        private readonly MusicEntity _musicEntity = default;
         private readonly PhaseEntity _phaseEntity = default;
         private readonly TurnUseCase _turnUseCase = default;
 
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public PhasePresenter(PhaseEntity phaseEntity, TurnUseCase turnUseCase)
+        public PhasePresenter(ScreenContainer screenContainer, MusicEntity musicEntity, PhaseEntity phaseEntity,
+            TurnUseCase turnUseCase)
         {
+            _screenContainer = screenContainer;
+            _musicEntity = musicEntity;
             _phaseEntity = phaseEntity;
             _turnUseCase = turnUseCase;
         }
@@ -43,6 +50,10 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
                 .Where(phase => phase == DancePhase.TurnChange)
                 .Subscribe(_ => _turnUseCase.OnTurnChange(_cancellationToken.Token))
                 .AddTo(_disposable);
+
+            _musicEntity.OnFinishAsObservable()
+                .Take(1)
+                .Subscribe(_ => _screenContainer.Push("Result").Forget());
         }
 
         private async void OnDance()

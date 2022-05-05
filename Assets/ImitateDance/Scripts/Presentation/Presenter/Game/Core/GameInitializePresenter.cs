@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
 {
-    public sealed class ScoreLoadPresenter : IInitializable
+    public sealed class GameInitializePresenter : IInitializable
     {
         private readonly ScreenContainer _screenContainer = default;
         private readonly MusicEntity _musicEntity = default;
@@ -15,7 +15,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
 
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
-        public ScoreLoadPresenter(ScreenContainer screenContainer, MusicEntity musicEntity,
+        public GameInitializePresenter(ScreenContainer screenContainer, MusicEntity musicEntity,
             DifficultyEntity difficultyEntity)
         {
             _screenContainer = screenContainer;
@@ -25,9 +25,9 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
 
         public async void Initialize()
         {
-            // 譜面のロード
+            // 譜面のロード　まで完了後 UIを呼び出す
             await _musicEntity.Initialize(_difficultyEntity.Value, _cancellation.Token);
-            _screenContainer.Push("Game", token: _cancellation.Token).Forget();
+            _screenContainer.Push("Intro", token: _cancellation.Token).Forget();
         }
     }
 }

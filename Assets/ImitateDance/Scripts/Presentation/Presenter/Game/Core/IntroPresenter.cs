@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using ImitateDance.Scripts.Domain.UseCase.Game.Core;
+using ImitateDance.Scripts.Presentation.View.Common;
 using UniScreen.Container;
 using UniScreen.Extension;
 using UnityEngine.Playables;
@@ -13,19 +14,24 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
         private readonly ScreenContainer _screenContainer = default;
         private readonly TurnUseCase _turnUseCase = default;
         private readonly PlayableDirector _intro = default;
+        private readonly AudioView _audioView = default;
 
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
-        public IntroPresenter(ScreenContainer screenContainer, TurnUseCase turnUseCase, PlayableDirector intro)
+        public IntroPresenter(ScreenContainer screenContainer, TurnUseCase turnUseCase, PlayableDirector intro,
+            AudioView audioView)
         {
             _screenContainer = screenContainer;
             _turnUseCase = turnUseCase;
             _intro = intro;
+            _audioView = audioView;
         }
 
         public async void Initialize()
         {
-            // todo BGMのストップ
+            await _audioView.Load("Sound/Intro", _cancellation.Token);
+            _audioView.Play();
+            
             // intro
             await _intro.PlayAsync(_cancellation.Token);
             if (_cancellation.IsCancellationRequested) return;
@@ -34,7 +40,10 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
             await _screenContainer.Push("Game", token: _cancellation.Token);
             if (_cancellation.IsCancellationRequested) return;
 
-            // todo ゲーム音楽再生
+            await _audioView.Load("Sound/GameMusic", _cancellation.Token);
+
+            _audioView.Stop();
+            _audioView.PlayGameMusic();
             _turnUseCase.GameStart();
         }
 

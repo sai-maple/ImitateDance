@@ -8,7 +8,7 @@ namespace ImitateDance.Scripts.Applications.Installer.Game.Core
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<ScoreLoadPresenter>();
+            builder.RegisterEntryPoint<GameInitializePresenter>();
         }
     }
 }
