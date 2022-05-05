@@ -82,7 +82,7 @@ MonoBehaviour:
     TypeName: ImitateDance.Scripts.Applications.Installer.Game.Core.GameInstaller
   autoRun: 1
   autoInjectGameObjects: []
-  _intro: {fileID: 0}
+  _intro: {fileID: 1252749951727117493}
 --- !u!1 &1342749891218395034
 GameObject:
   m_ObjectHideFlags: 0

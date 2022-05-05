@@ -298,7 +298,7 @@ MonoBehaviour:
     TypeName: ImitateDance.Scripts.Applications.Installer.Common.RootInstaller
   autoRun: 1
   autoInjectGameObjects: []
-  _sceneName: Tutorial
+  _sceneName: TutorialScene
 --- !u!114 &1685202475901600762
 MonoBehaviour:
   m_ObjectHideFlags: 0
