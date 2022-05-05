@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: Title
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 17ed01f79d39b4c3aa70d6caedcd8e48
+    m_Address: HomeScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ea55b3ad8806f440e98ebb5030b04ccc, type: 2}
   m_SchemaSet:

@@ -14,7 +14,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Screen
 
         public async void Initialize()
         {
-            await _screenContainer.NewScreen("ScreenEmpty");
+            await _screenContainer.NewScreen("HomeScreen");
             await _screenContainer.Push("Title");
         }
     }
