@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f35dafdb7c54bc9a29c625c7369c25f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasName: ScreenEmpty
+  _canvasName: GameScreen
   _screenName: Loading
 --- !u!114 &9211150376571266087
 MonoBehaviour:
