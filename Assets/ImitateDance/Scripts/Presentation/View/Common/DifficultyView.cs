@@ -26,12 +26,12 @@ namespace ImitateDance.Scripts.Presentation.View.Common
 
         public IObservable<Unit> OnNextAsObservable()
         {
-            return _nextButton.OnClickAsObservable().ThrottleFirst(TimeSpan.FromMilliseconds(500));
+            return _nextButton.OnClickAsObservable();
         }
 
         public IObservable<Unit> OnPreviousAsObservable()
         {
-            return _previousButton.OnClickAsObservable().ThrottleFirst(TimeSpan.FromMilliseconds(500));
+            return _previousButton.OnClickAsObservable();
         }
 
         public void SetDifficult(MusicDifficulty difficulty)
