@@ -9,20 +9,16 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
     {
         private readonly PhaseEntity _phaseEntity = default;
         private readonly ScoreEntity _scoreEntity = default;
-        private readonly SpeedEntity _speedEntity = default;
         private readonly TimeEntity _timeEntity = default;
         private readonly MusicEntity _musicEntity = default;
         private readonly PointEntity _pointEntity = default;
         private readonly TurnPlayerEntity _turnPlayerEntity = default;
 
-        // todo 楽譜のロード
-
-        public TurnUseCase(PhaseEntity phaseEntity, ScoreEntity scoreEntity, SpeedEntity speedEntity,
+        public TurnUseCase(PhaseEntity phaseEntity, ScoreEntity scoreEntity,
             TimeEntity timeEntity, MusicEntity musicEntity, PointEntity pointEntity, TurnPlayerEntity turnPlayerEntity)
         {
             _phaseEntity = phaseEntity;
             _scoreEntity = scoreEntity;
-            _speedEntity = speedEntity;
             _timeEntity = timeEntity;
             _musicEntity = musicEntity;
             _pointEntity = pointEntity;
@@ -62,8 +58,6 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
             // 譜面の最後に到達したら終了
             if (!_musicEntity.TryNext()) return;
             _scoreEntity.SetScore(_musicEntity.Score);
-            // 偶数の時呼ぶ
-            // _speedEntity.SpeedUp();
             await _timeEntity.AudienceAsync(_musicEntity.AudienceTime, token);
             if (token.IsCancellationRequested) return;
             _phaseEntity.Next(DancePhase.Demo);

@@ -16,7 +16,6 @@ namespace ImitateDance.Scripts.Applications.Installer.Game.UI
             builder.Register<PositionEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<LanePositionUseCase>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
-            // todo presenter and view
             builder.RegisterEntryPoint<LanePresenter>();
             builder.RegisterComponent(GetComponent<LanePairView>());
         }
