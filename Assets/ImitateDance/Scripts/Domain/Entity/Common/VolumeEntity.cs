@@ -8,6 +8,9 @@ namespace ImitateDance.Scripts.Domain.Entity.Common
         private readonly ReactiveProperty<float> _se = default;
         private readonly ReactiveProperty<float> _bgm = default;
 
+        public float SeVolume => _se.Value;
+        public float BgmVolume => _bgm.Value;
+
         public VolumeEntity()
         {
             _se = new ReactiveProperty<float>(1);
@@ -29,7 +32,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Common
             _se.Value = value;
         }
         
-        public void SetBgmSeVolume(float value)
+        public void SetBgmVolume(float value)
         {
             _bgm.Value = value;
         }
