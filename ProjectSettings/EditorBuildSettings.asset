@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ImitateDance/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/ImitateDance/Scenes/MainScene.unity
+    guid: 397d50b1649024c6494651161b7d10ca
+  - enabled: 1
+    path: Assets/ImitateDance/Scenes/GameScene.unity
+    guid: b1d9497461f564ebbbbe10f24808818a
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 152ebc814f0cd4957a868f69ebeac2b7, type: 2}

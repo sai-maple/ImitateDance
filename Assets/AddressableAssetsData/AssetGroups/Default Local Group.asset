@@ -45,6 +45,18 @@ MonoBehaviour:
     m_Address: Intro
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 74b5649dac2a744f6bfc5b8f578c40cc
+    m_Address: GameScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1eec4aaf34e7f4a9f89d426e8a523fe8
+    m_Address: Game
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f25be469667274a869b1871bc11265c0
+    m_Address: Tutorial
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ea55b3ad8806f440e98ebb5030b04ccc, type: 2}
   m_SchemaSet:

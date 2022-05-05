@@ -6,7 +6,7 @@ using ImitateDance.Scripts.Domain.UseCase.Game.Core;
 using UniRx;
 using VContainer.Unity;
 
-namespace ImitateDance.Scripts.Presentation.Presenter.Game.Phase
+namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
 {
     public sealed class PhasePresenter : IInitializable, IDisposable
     {

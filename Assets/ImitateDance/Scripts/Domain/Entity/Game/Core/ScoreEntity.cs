@@ -10,20 +10,20 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
     public sealed class ScoreEntity : IDisposable
     {
         private readonly Subject<DanceData> _subject = default;
-        private readonly Subject<ScoreDto> _scoreSubject = default;
+        private readonly Subject<ScoreData> _scoreSubject = default;
         private readonly Dictionary<int, DanceDirection> _demo = default;
         private readonly Dictionary<int, DanceDirection> _dunce = default;
-        private ScoreDto _score = default;
+        private ScoreData _score = default;
 
         public ScoreEntity()
         {
             _subject = new Subject<DanceData>();
-            _scoreSubject = new Subject<ScoreDto>();
+            _scoreSubject = new Subject<ScoreData>();
             _demo = new Dictionary<int, DanceDirection>();
             _dunce = new Dictionary<int, DanceDirection>();
         }
 
-        public IObservable<ScoreDto> OnScoreAsObservable()
+        public IObservable<ScoreData> OnScoreAsObservable()
         {
             return _scoreSubject.Share();
         }
@@ -35,7 +35,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         }
 
         // demo dunceの中身を空の譜面にする
-        public void SetScore(ScoreDto score)
+        public void SetScore(ScoreData score)
         {
             _score = score;
             _demo.Clear();

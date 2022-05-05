@@ -11,10 +11,10 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         [SerializeField] private LaneView _dunceLane = default;
 
         // Audienceのタイミングで初期化
-        public void Initialize(ScoreDto scoreDto)
+        public void Initialize(ScoreData scoreData)
         {
-            _demoLane.Initialize(scoreDto);
-            _dunceLane.Initialize(scoreDto);
+            _demoLane.Initialize(scoreData);
+            _dunceLane.Initialize(scoreData);
         }
 
         // Dance or TurnChange に入った時Demoを隠す

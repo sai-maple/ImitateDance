@@ -1,7 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using ImitateDance.Scripts.Applications.Data;
+using ImitateDance.Scripts.Applications.Enums;
 using UniRx;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 {
@@ -9,10 +14,10 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
     {
         public float DanceTime { get; private set; }
         public float AudienceTime { get; private set; }
-        public ScoreDto Score => _score[_index];
+        public ScoreData Score => _score[_index];
 
         private readonly Subject<Unit> _subject = default;
-        private List<ScoreDto> _score = default;
+        private List<ScoreData> _score = default;
         private int _index = default;
 
         public MusicEntity()
@@ -21,10 +26,6 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _index = -1;
             DanceTime = 1;
             AudienceTime = 1;
-            _score = new List<ScoreDto>()
-            {
-                new ScoreDto(new List<NoteDto>())
-            };
         }
 
         public IObservable<Unit> OnFinishAsObservable()
@@ -33,16 +34,15 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         }
 
         // json のロード　パース　曲のBPMを元に読み込む, 譜面のパース
-        public void Initialize()
+        public async UniTask Initialize(MusicDifficulty difficulty, CancellationToken token = default)
         {
             // 最初Nextから呼ばれるので初期値は-1にする
+            var textAsset = await Addressables.LoadAssetAsync<TextAsset>($"Score_{difficulty}").WithCancellation(token);
+            var score = JsonUtility.FromJson<ScoreDto>(textAsset.text);
+            _score = score.Scores;
             _index = -1;
-            DanceTime = 1;
-            AudienceTime = 1;
-            _score = new List<ScoreDto>()
-            {
-                new ScoreDto(new List<NoteDto>())
-            };
+            DanceTime = (60f / score.Bpm) * 7;
+            AudienceTime = 60f / score.Bpm;
         }
 
         // 次のターンの譜面をセット

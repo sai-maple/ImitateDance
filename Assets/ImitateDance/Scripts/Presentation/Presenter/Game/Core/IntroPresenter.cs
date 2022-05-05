@@ -6,7 +6,7 @@ using UniScreen.Extension;
 using UnityEngine.Playables;
 using VContainer.Unity;
 
-namespace ImitateDance.Scripts.Presentation.Presenter.Game.Phase
+namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
 {
     public sealed class IntroPresenter : IInitializable, IDisposable
     {
