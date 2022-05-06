@@ -61,6 +61,14 @@ MonoBehaviour:
     m_Address: Result
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 981820d946adf4173954e2caacc17d2c
+    m_Address: ScoreEasy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a66b2fc7139f84c67805922a6fa92282
+    m_Address: GameMusicEasy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ea55b3ad8806f440e98ebb5030b04ccc, type: 2}
   m_SchemaSet:

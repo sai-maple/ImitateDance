@@ -36,7 +36,7 @@ namespace ImitateDance.Editor
             var notes = JsonUtility.FromJson<Notes>(_score.text);
             var scoreDto = Convert(notes);
 
-            var filePath = $"Assets/ImitateDance/Score/{_difficulty}.json";
+            var filePath = $"Assets/ImitateDance/Score/Score{_difficulty}.json";
             var outJson = JsonUtility.ToJson(scoreDto);
             File.WriteAllText(filePath, outJson);
         }

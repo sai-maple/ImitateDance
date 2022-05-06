@@ -37,10 +37,10 @@ namespace ImitateDance.Scripts.Presentation.View.Common
             _audioSources[_index].DOFade(_volume, 1);
         }
 
-        public void Stop()
+        public async UniTask StopAsync(CancellationToken token)
         {
             var current = _audioSources[_index];
-            current.DOFade(0, 1).OnComplete(() => current.Stop());
+            await current.DOFade(0, 1).OnComplete(() => current.Stop()).WithCancellation(token);
         }
 
         public void PlayGameMusic()

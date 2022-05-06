@@ -38,7 +38,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public async UniTask Initialize(MusicDifficulty difficulty, CancellationToken token = default)
         {
             // 最初Nextから呼ばれるので初期値は-1にする
-            var textAsset = await Addressables.LoadAssetAsync<TextAsset>($"Score_{difficulty}").WithCancellation(token);
+            var textAsset = await Addressables.LoadAssetAsync<TextAsset>($"Score{difficulty}").WithCancellation(token);
             var score = JsonUtility.FromJson<ScoreDto>(textAsset.text);
             _score = score.Scores;
             _index = -1;
@@ -51,7 +51,9 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public bool TryNext()
         {
             _index++;
-            return _index < _score.Count;
+            var hasNext = _index < _score.Count;
+            if (!hasNext) _subject.OnNext(Unit.Default);
+            return hasNext;
         }
 
         public void Dispose()

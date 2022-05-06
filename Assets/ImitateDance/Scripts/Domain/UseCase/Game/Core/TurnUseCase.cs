@@ -39,7 +39,7 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
             // パーフェクトのスコア計算
             _pointEntity.Bonus(_turnPlayerEntity.Current, _scoreEntity.IsPerfect());
             _turnPlayerEntity.NextTurn();
-            await _timeEntity.AudienceAsync(_musicEntity.DanceTime, _musicEntity.AudienceTime, token);
+            await _timeEntity.AudienceAsync(_musicEntity.AudienceTime, token);
             if (token.IsCancellationRequested) return;
             _phaseEntity.Next(DancePhase.Dance);
         }
@@ -58,7 +58,7 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
             // 譜面の最後に到達したら終了
             if (!_musicEntity.TryNext()) return;
             _scoreEntity.SetScore(_musicEntity.Score);
-            await _timeEntity.AudienceAsync(_musicEntity.DanceTime, _musicEntity.AudienceTime, token);
+            await _timeEntity.AudienceAsync(_musicEntity.AudienceTime, token);
             if (token.IsCancellationRequested) return;
             _phaseEntity.Next(DancePhase.Demo);
         }
