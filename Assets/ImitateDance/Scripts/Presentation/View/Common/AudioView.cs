@@ -30,7 +30,7 @@ namespace ImitateDance.Scripts.Presentation.View.Common
         {
             var current = _audioSources[_index];
             current.DOFade(0, 1).OnComplete(() => current.Stop());
-            _index++;
+            _index = (_index + 1) % _audioSources.Length;
             _audioSources[_index].loop = true;
             _audioSources[_index].clip = _clip;
             _audioSources[_index].Play();

@@ -13,16 +13,11 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         // Audienceのタイミングで初期化
         public void Initialize(ScoreData scoreData)
         {
+            Debug.Log(scoreData.Score);
             _demoLane.Initialize(scoreData);
             _dunceLane.Initialize(scoreData);
         }
 
-        // Dance or TurnChange に入った時Demoを隠す
-        public void HideDemo()
-        {
-            _demoLane.HideAll();
-        }
-        
         public void Play(DancePhase dancePhase, float normalizeLate)
         {
             switch (dancePhase)
@@ -47,12 +42,12 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             {
                 case DancePhase.Dance:
                 case DancePhase.Audience:
-                    _demoLane.Dance(danceData.Beat, danceData.Demo, danceData.IsSuccess);
+                    _demoLane.Dance(danceData.Beat, danceData.Demo, true);
                     _dunceLane.Dance(danceData.Beat, danceData.Dance, danceData.IsSuccess);
                     break;
                 case DancePhase.Demo:
                 case DancePhase.TurnChange:
-                    _demoLane.Dance(danceData.Beat, danceData.Demo, danceData.IsSuccess);
+                    _demoLane.Dance(danceData.Beat, danceData.Demo, true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(dancePhase), dancePhase, null);

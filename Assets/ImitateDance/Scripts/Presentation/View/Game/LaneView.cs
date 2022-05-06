@@ -23,15 +23,6 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             }
         }
 
-        // ターン交代中に、変化したNoteを隠す
-        public void HideAll()
-        {
-            foreach (var note in _noteViews)
-            {
-                note.Hide();
-            }
-        }
-
         // ターンの音楽再生中、再生位位置に線を移動させる
         public void Play(float normalize)
         {

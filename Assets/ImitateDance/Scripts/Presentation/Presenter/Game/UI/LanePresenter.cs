@@ -32,11 +32,6 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
                 .Subscribe(_lanePairView.Initialize)
                 .AddTo(_disposable);
 
-            _phaseEntity.OnChangeAsObservable()
-                .Where(phase => phase == DancePhase.TurnChange)
-                .Subscribe(_ => _lanePairView.HideDemo())
-                .AddTo(_disposable);
-
             Observable.EveryFixedUpdate()
                 .Subscribe(_ => _lanePairView.Play(_phaseEntity.Current, _lanePositionUseCase.NormalizePosition()))
                 .AddTo(_disposable);

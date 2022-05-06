@@ -10,24 +10,20 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         [SerializeField] private Image _emptyImage = default;
         [SerializeField] private Image _nonEmptyImage = default;
         [SerializeField] private Image _missImage = default;
-        private static readonly int HideHash = Animator.StringToHash("Hide");
+        private static readonly int EmptyHash = Animator.StringToHash("Empty");
 
         public void Initialize(bool isNotEmpty)
         {
             _emptyImage.enabled = !isNotEmpty;
             _nonEmptyImage.enabled = isNotEmpty;
             _missImage.enabled = false;
-            _directionAnimator.SetTrigger(HideHash);
-        }
-
-        public void Hide()
-        {
-            _directionAnimator.SetTrigger(HideHash);
+            _directionAnimator.SetTrigger(EmptyHash);
         }
 
         public void Judge(DanceDirection dance, bool isSuccess)
         {
             _directionAnimator.SetTrigger(dance.ToString());
+            _nonEmptyImage.enabled = false;
             _missImage.enabled = !isSuccess;
         }
     }

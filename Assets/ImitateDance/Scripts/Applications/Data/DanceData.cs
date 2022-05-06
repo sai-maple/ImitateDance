@@ -7,7 +7,7 @@ namespace ImitateDance.Scripts.Applications.Data
         public int Beat { get; }
         public DanceDirection Demo { get; }
         public DanceDirection Dance { get; }
-        public bool IsSuccess => Demo == Dance;
+        public bool IsSuccess => Demo ==  (Demo | Dance);
 
         public DanceData(int beat, DanceDirection dance)
         {

@@ -50,7 +50,11 @@ namespace ImitateDance.Editor
                 .GroupBy(x => x.num / 16)
                 .Where(group => group.Key % 2 == 0)
                 .Select(group =>
-                    new ScoreData(group.Select(note => new NoteData(note.num + 1, (note.num + 1) * numTime)).ToList()))
+                    new ScoreData(group.Select(note =>
+                    {
+                        var num = note.num % 16;
+                        return new NoteData(num, (num + 1) * numTime);
+                    }).ToList()))
                 .ToList();
             return new ScoreDto(score, notes.BPM);
         }

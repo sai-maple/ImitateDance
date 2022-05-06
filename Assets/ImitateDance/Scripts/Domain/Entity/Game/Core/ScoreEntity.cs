@@ -40,6 +40,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _score = score;
             _demo.Clear();
             _dunce.Clear();
+            _scoreSubject.OnNext(score);
         }
 
         // 閾値以内のnoteに入力した方向をセットする

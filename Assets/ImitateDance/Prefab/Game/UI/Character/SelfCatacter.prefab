@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f994e6c9c60b4a81ab05cd66fa7915e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _animator: {fileID: 8433796336769990424}
   _selfTurn: 0
 --- !u!114 &8433796336769990427
 MonoBehaviour:

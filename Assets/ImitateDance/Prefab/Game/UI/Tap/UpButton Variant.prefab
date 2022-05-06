@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpButton Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7036948138841882374, guid: 150c8662c3b804f48a64f32cea76fa50, type: 3}
+      propertyPath: _direction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8051487498347983705, guid: 150c8662c3b804f48a64f32cea76fa50, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
