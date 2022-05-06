@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 6023563396907628410}
   - component: {fileID: 3455894430960865209}
   - component: {fileID: 6901220799824884239}
+  - component: {fileID: 7970216236875110854}
+  - component: {fileID: 7945640107009854093}
+  - component: {fileID: 5381711115104363739}
   m_Layer: 5
   m_Name: Game
   m_TagString: Untagged
@@ -65,7 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb11224094e4967b1b87a7319e5cce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screenAnimations: []
+  _screenAnimations:
+  - {fileID: 7945640107009854093}
 --- !u!114 &6901220799824884239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +86,51 @@ MonoBehaviour:
     TypeName: ImitateDance.Scripts.Applications.Installer.Game.Core.GameInstaller
   autoRun: 1
   autoInjectGameObjects: []
+--- !u!114 &7970216236875110854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103994079073469428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782cda51d7de46618b036e4fafd071ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7945640107009854093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103994079073469428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a02a63c8ade4266ac2055af73b1aa09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 5381711115104363739}
+--- !u!95 &5381711115104363739
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103994079073469428}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7fb240877c9d841a2ae30d1b5644c080, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3735141544952206846
 PrefabInstance:
   m_ObjectHideFlags: 0
