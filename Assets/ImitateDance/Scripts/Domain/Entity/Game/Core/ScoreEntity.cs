@@ -105,8 +105,10 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             foreach (var note in _score.Score)
             {
                 // todo threshold and point
-                if (Mathf.Abs(note.Time - time) > 0.1f) continue;
+                var abs = Mathf.Abs(note.Time - time);
+                if (abs > _offset) continue;
                 if (_dunce.ContainsKey(note.Beat)) continue;
+                point = (int)(100 * (_offset - abs / 2f));
                 _dunce.Add(note.Beat, danceDirection);
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
                 _dunceSubject.OnNext(new DanceData(note.Beat, demo, danceDirection));
