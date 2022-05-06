@@ -13,7 +13,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public PhaseEntity()
         {
             _subject = new Subject<DancePhase>();
-            Current = DancePhase.Audience;
+            Current = DancePhase.Demo;
         }
 
         public IObservable<DancePhase> OnChangeAsObservable()
@@ -23,7 +23,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 
         public void GameStart()
         {
-            Current = DancePhase.Audience;
+            Current = DancePhase.Demo;
             _subject.OnNext(Current);
             Logger.Log(Current);
         }

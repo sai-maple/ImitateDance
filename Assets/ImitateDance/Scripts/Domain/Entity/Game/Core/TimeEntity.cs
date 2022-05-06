@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 
@@ -17,11 +16,6 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 if (token.IsCancellationRequested) return;
                 if (Time > limit) break;
             }
-        }
-
-        public async UniTask AudienceAsync(float time, CancellationToken token)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(time), cancellationToken: token);
         }
 
         // delta time * speed 

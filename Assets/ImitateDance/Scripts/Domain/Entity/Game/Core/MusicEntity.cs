@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using ImitateDance.Scripts.Applications.Data;
@@ -14,7 +13,6 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
     public sealed class MusicEntity : IDisposable
     {
         public float DanceTime { get; private set; }
-        public float AudienceTime { get; private set; }
         public ScoreData Score => _score[_index];
 
         private readonly Subject<Unit> _subject = default;
@@ -24,9 +22,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public MusicEntity()
         {
             _subject = new Subject<Unit>();
-            _index = -1;
             DanceTime = 1;
-            AudienceTime = 1;
         }
 
         public IObservable<Unit> OnFinishAsObservable()
@@ -41,10 +37,9 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             var textAsset = await Addressables.LoadAssetAsync<TextAsset>($"Score{difficulty}").WithCancellation(token);
             var score = JsonUtility.FromJson<ScoreDto>(textAsset.text);
             _score = score.Scores;
-            _index = -1;
+            _index = 0;
             var beetTime = 60f / score.Bpm;
-            DanceTime = beetTime * 7;
-            AudienceTime = beetTime * 1;
+            DanceTime = beetTime * 8;
         }
 
         // 次のターンの譜面をセット

@@ -31,10 +31,6 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
 
         public void Initialize()
         {
-            _phaseEntity.OnChangeAsObservable()
-                .Where(phase => phase == DancePhase.Audience)
-                .Subscribe(_ => _turnUseCase.OnAudience(_cancellationToken.Token))
-                .AddTo(_disposable);
 
             _phaseEntity.OnChangeAsObservable()
                 .Where(phase => phase == DancePhase.Dance)
@@ -44,11 +40,6 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
             _phaseEntity.OnChangeAsObservable()
                 .Where(phase => phase == DancePhase.Demo)
                 .Subscribe(_ => OnDemo())
-                .AddTo(_disposable);
-
-            _phaseEntity.OnChangeAsObservable()
-                .Where(phase => phase == DancePhase.TurnChange)
-                .Subscribe(_ => _turnUseCase.OnTurnChange(_cancellationToken.Token))
                 .AddTo(_disposable);
 
             _musicEntity.OnFinishAsObservable()
