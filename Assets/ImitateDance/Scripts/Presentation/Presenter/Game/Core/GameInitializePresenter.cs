@@ -11,15 +11,17 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
     {
         private readonly ScreenContainer _screenContainer = default;
         private readonly MusicEntity _musicEntity = default;
+        private readonly ScoreEntity _scoreEntity = default;
         private readonly DifficultyEntity _difficultyEntity = default;
 
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
         public GameInitializePresenter(ScreenContainer screenContainer, MusicEntity musicEntity,
-            DifficultyEntity difficultyEntity)
+            ScoreEntity scoreEntity, DifficultyEntity difficultyEntity)
         {
             _screenContainer = screenContainer;
             _musicEntity = musicEntity;
+            _scoreEntity = scoreEntity;
             _difficultyEntity = difficultyEntity;
         }
 
@@ -27,6 +29,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
         {
             // 譜面のロード　まで完了後 UIを呼び出す
             await _musicEntity.Initialize(_difficultyEntity.Value, _cancellation.Token);
+            _scoreEntity.Initialize(_musicEntity.Score, _musicEntity.Next);
             _screenContainer.Push("Intro", token: _cancellation.Token).Forget();
         }
     }

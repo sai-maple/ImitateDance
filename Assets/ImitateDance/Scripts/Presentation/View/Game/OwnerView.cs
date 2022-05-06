@@ -14,7 +14,6 @@ namespace ImitateDance.Scripts.Presentation.View.Game
 
         public void ChangeState(DancePhase phase, TurnPlayer turnPlayer)
         {
-            Logger.Log($"{phase} : {turnPlayer}");
             var demo = turnPlayer == TurnPlayer.Self ? SelfHash : OpponentHash;
             var dunce = turnPlayer == TurnPlayer.Self ^ phase == DancePhase.Dance
                 ? OpponentHash

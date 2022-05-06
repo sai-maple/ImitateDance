@@ -25,7 +25,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _noteSubject = new Subject<NoteData>();
             _demo = new Dictionary<int, DanceDirection>();
             _dunce = new Dictionary<int, DanceDirection>();
-            _offset = 0.1667f;
+            _offset = 0.01667f * 8;
         }
 
         public IObservable<NoteData> OnScoreAsObservable()
@@ -74,7 +74,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 
         public void UpdateDunce(float time, float halfBarTime)
         {
-            if (halfBarTime * _index + _offset > time) return;
+            if (halfBarTime * _index + _offset * 2 > time) return;
             var note = _score.Score.FirstOrDefault(note => note.Beat == _index);
 
             var data = _demo.ContainsKey(_index)
