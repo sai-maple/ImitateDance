@@ -1,3 +1,4 @@
+using ImitateDance.Scripts.Applications.Data;
 using ImitateDance.Scripts.Applications.Enums;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,15 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             _nonEmptyImage.enabled = isNotEmpty;
             _missImage.enabled = false;
             _directionAnimator.SetTrigger(EmptyHash);
+        }
+
+        public void SetDunce(NoteData noteData)
+        {
+            _emptyImage.enabled = !noteData.HasDirection;
+            _nonEmptyImage.enabled = noteData.HasDirection && noteData.Direction == DanceDirection.Non;
+            _missImage.enabled = false;
+            var hash = noteData.Direction == DanceDirection.Non ? EmptyHash : Animator.StringToHash(noteData.Direction.ToString());
+            _directionAnimator.SetTrigger(hash);
         }
 
         public void Judge(DanceDirection dance, bool isSuccess)

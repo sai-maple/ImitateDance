@@ -13,10 +13,12 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
     public sealed class MusicEntity : IDisposable
     {
         public float DanceTime { get; private set; }
-        public ScoreData Score => _score[_index];
+        public float HalfBarTime { get; private set; }
+        public NotesDto Score => _score[_index];
+        public NotesDto Next => _index + 1 < _score.Count ? _score[_index + 1] : new NotesDto(new List<NoteDto>());
 
         private readonly Subject<Unit> _subject = default;
-        private List<ScoreData> _score = default;
+        private List<NotesDto> _score = default;
         private int _index = default;
 
         public MusicEntity()
@@ -40,6 +42,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _index = 0;
             var beetTime = 60f / score.Bpm;
             DanceTime = beetTime * 8;
+            HalfBarTime = beetTime / 2;
         }
 
         // 次のターンの譜面をセット

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ImitateDance.Scripts.Applications.Data;
 using ImitateDance.Scripts.Applications.Enums;
 using UniRx;
@@ -9,38 +10,78 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 {
     public sealed class ScoreEntity : IDisposable
     {
-        private readonly Subject<DanceData> _subject = default;
-        private readonly Subject<ScoreData> _scoreSubject = default;
+        private readonly Subject<DanceData> _dunceSubject = default;
+        private readonly Subject<NoteData> _noteSubject = default;
         private readonly Dictionary<int, DanceDirection> _demo = default;
         private readonly Dictionary<int, DanceDirection> _dunce = default;
-        private ScoreData _score = default;
+        private readonly float _offset = default;
+        private NotesDto _score = default;
+        private NotesDto _next = default;
+        private int _index = default;
 
         public ScoreEntity()
         {
-            _subject = new Subject<DanceData>();
-            _scoreSubject = new Subject<ScoreData>();
+            _dunceSubject = new Subject<DanceData>();
+            _noteSubject = new Subject<NoteData>();
             _demo = new Dictionary<int, DanceDirection>();
             _dunce = new Dictionary<int, DanceDirection>();
+            _offset = 0.1f;
         }
 
-        public IObservable<ScoreData> OnScoreAsObservable()
+        public IObservable<NoteData> OnScoreAsObservable()
         {
-            return _scoreSubject.Share();
+            return _noteSubject.Share();
         }
 
         // タップしたタイミングのNoteを返す
         public IObservable<DanceData> OnDanceAsObservable()
         {
-            return _subject.Share();
+            return _dunceSubject.Share();
+        }
+
+        public void Initialize(NotesDto score, NotesDto next)
+        {
+            _score = score;
+            _next = next;
+            _demo.Clear();
+            _dunce.Clear();
+            _index = 0;
         }
 
         // demo dunceの中身を空の譜面にする
-        public void SetScore(ScoreData score)
+        public void SetScore(NotesDto next)
         {
-            _score = score;
+            _score = _next;
+            _next = next;
             _demo.Clear();
             _dunce.Clear();
-            _scoreSubject.OnNext(score);
+        }
+
+        public void OnStartPhase()
+        {
+            _index = 0;
+        }
+
+        // dunce の判定範囲をすぎ分から、demoの譜面描画を更新する
+        public void UpdateDemo(float time, float halfBarTime)
+        {
+            if (halfBarTime * _index + _offset > time) return;
+            var hasNote = _next.Score.Any(note => note.Beat == _index);
+            var data = new NoteData(_index, hasNote);
+            _noteSubject.OnNext(data);
+            _index++;
+        }
+
+        public void UpdateDunce(float time, float halfBarTime)
+        {
+            if (halfBarTime * _index + _offset > time) return;
+            var note = _score.Score.FirstOrDefault(note => note.Beat == _index);
+
+            var data = _demo.ContainsKey(_index)
+                ? new NoteData(_index, note != null, _demo[_index])
+                : new NoteData(_index, note != null);
+            _noteSubject.OnNext(data);
+            _index++;
         }
 
         // 閾値以内のnoteに入力した方向をセットする
@@ -48,10 +89,10 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         {
             foreach (var note in _score.Score)
             {
-                if (Mathf.Abs(note.Time - time) > 0.1f) continue;
+                if (Mathf.Abs(note.Time - time) > _offset) continue;
                 if (_demo.ContainsKey(note.Beat)) continue;
                 _demo.Add(note.Beat, demo);
-                _subject.OnNext(new DanceData(note.Beat, demo));
+                _dunceSubject.OnNext(new DanceData(note.Beat, demo));
                 break;
             }
         }
@@ -60,6 +101,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public int OnDance(float time, DanceDirection danceDirection)
         {
             var point = 0;
+            // _dunceの中身から判別するように変更する
             foreach (var note in _score.Score)
             {
                 // todo threshold and point
@@ -67,7 +109,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 if (_dunce.ContainsKey(note.Beat)) continue;
                 _dunce.Add(note.Beat, danceDirection);
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
-                _subject.OnNext(new DanceData(note.Beat, demo, danceDirection));
+                _dunceSubject.OnNext(new DanceData(note.Beat, demo, danceDirection));
                 break;
             }
 
@@ -88,10 +130,10 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 
         public void Dispose()
         {
-            _subject?.OnCompleted();
-            _subject?.Dispose();
-            _scoreSubject?.OnCompleted();
-            _scoreSubject?.Dispose();
+            _dunceSubject?.OnCompleted();
+            _dunceSubject?.Dispose();
+            _noteSubject?.OnCompleted();
+            _noteSubject?.Dispose();
         }
     }
 }

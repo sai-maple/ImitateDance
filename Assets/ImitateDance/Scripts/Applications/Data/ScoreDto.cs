@@ -7,13 +7,13 @@ namespace ImitateDance.Scripts.Applications.Data
     [Serializable]
     public sealed class ScoreDto
     {
-        [SerializeField] private List<ScoreData> scores;
+        [SerializeField] private List<NotesDto> scores;
         [SerializeField] private int bpm;
 
-        public List<ScoreData> Scores => scores;
+        public List<NotesDto> Scores => scores;
         public int Bpm => bpm;
 
-        public ScoreDto(List<ScoreData> scores, int bpm)
+        public ScoreDto(List<NotesDto> scores, int bpm)
         {
             this.scores = scores;
             this.bpm = bpm;
@@ -21,19 +21,19 @@ namespace ImitateDance.Scripts.Applications.Data
     }
 
     [Serializable]
-    public sealed class ScoreData
+    public sealed class NotesDto
     {
-        [SerializeField] private List<NoteData> score;
-        public IReadOnlyList<NoteData> Score => score;
+        [SerializeField] private List<NoteDto> score;
+        public IReadOnlyList<NoteDto> Score => score;
 
-        public ScoreData(List<NoteData> score)
+        public NotesDto(List<NoteDto> score)
         {
             this.score = score;
         }
     }
 
     [Serializable]
-    public sealed class NoteData
+    public sealed class NoteDto
     {
         [SerializeField] private int beet;
         [SerializeField] private float time;
@@ -41,7 +41,7 @@ namespace ImitateDance.Scripts.Applications.Data
         public int Beat => beet;
         public float Time => time;
 
-        public NoteData(int beet, float time)
+        public NoteDto(int beet, float time)
         {
             this.beet = beet;
             this.time = time;

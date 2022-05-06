@@ -15,11 +15,11 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         private Vector2 _position = default;
 
         // 楽譜データを渡して表示する
-        public void Initialize(ScoreData scoreData)
+        public void Initialize(NotesDto notesDto)
         {
             for (var i = 0; i < _noteViews.Count; i++)
             {
-                _noteViews[i].Initialize(scoreData.Score.Any(note => note.Beat == i));
+                _noteViews[i].Initialize(notesDto.Score.Any(note => note.Beat == i));
             }
         }
 
@@ -28,6 +28,12 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         {
             _position.x = _content.sizeDelta.x * normalize;
             _currentLine.anchoredPosition = _position;
+        }
+
+        public void UpdateNote(NoteData noteData)
+        {
+            if (noteData.Beat >= _noteViews.Count) return;
+            _noteViews[noteData.Beat].SetDunce(noteData);
         }
 
         // 入力を受けて、タイミングに応じたNoteを変化させる

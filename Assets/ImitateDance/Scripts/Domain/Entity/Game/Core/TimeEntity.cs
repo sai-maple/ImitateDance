@@ -6,6 +6,17 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
     public sealed class TimeEntity
     {
         public float Time { get; private set; }
+        private bool _startGame = default;
+
+        public TimeEntity()
+        {
+            _startGame = false;
+        }
+
+        public void GameStart()
+        {
+            _startGame = true;
+        }
 
         public async UniTask DanceAsync(float limit, CancellationToken token)
         {
@@ -21,6 +32,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         // delta time * speed 
         public void FixUpdate(float deltaTime)
         {
+            if (!_startGame) return;
             Time += deltaTime;
         }
     }
