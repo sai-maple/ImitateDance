@@ -8,6 +8,8 @@ namespace ImitateDance.Scripts.Presentation.View.Common
         {
             if (!TryGetComponent<CanvasGroup>(out var canvasGroup)) return;
             canvasGroup.alpha = 0;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
         }
     }
 }

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4837791279516633605}
   - component: {fileID: 4837791279516633607}
   - component: {fileID: 4837791279516633604}
+  - component: {fileID: 1765351511674797039}
+  - component: {fileID: 8288425809272787819}
   m_Layer: 5
   m_Name: LanepairView
   m_TagString: Untagged
@@ -64,6 +66,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 637566c292094d1facaf647bfce8d27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: ImitateDance.Scripts.Applications.Installer.Game.Core.GameInstaller
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!114 &1765351511674797039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837791279516633610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b43b883e3c9446a90907717c0d54c82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _demoAnimator: {fileID: 6078873962744168839}
+  _dunceAnimator: {fileID: 5332924507009565081}
+--- !u!114 &8288425809272787819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837791279516633610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7864f8248772463bacdf0e0b4dc8efde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
@@ -183,6 +215,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 844342113898737663, guid: 4cd054b84f57a405fa04561a34669694, type: 3}
   m_PrefabInstance: {fileID: 2335436589514871822}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &5332924507009565081 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7668356526670353815, guid: 4cd054b84f57a405fa04561a34669694, type: 3}
+  m_PrefabInstance: {fileID: 2335436589514871822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5230083402253638560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,5 +331,10 @@ MonoBehaviour:
 --- !u!224 &4837791278545024095 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 844342113898737663, guid: 0e619c02485eb4bf39871334d5dc5be9, type: 3}
+  m_PrefabInstance: {fileID: 5230083402253638560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6078873962744168839 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2074051172775385639, guid: 0e619c02485eb4bf39871334d5dc5be9, type: 3}
   m_PrefabInstance: {fileID: 5230083402253638560}
   m_PrefabAsset: {fileID: 0}

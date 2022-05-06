@@ -25,14 +25,12 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         {
             Current = DancePhase.Demo;
             _subject.OnNext(Current);
-            Logger.Log(Current);
         }
 
         public void Next(DancePhase phase)
         {
             Current = phase;
             _subject.OnNext(Current);
-            Logger.Log(phase);
         }
 
         public void Dispose()

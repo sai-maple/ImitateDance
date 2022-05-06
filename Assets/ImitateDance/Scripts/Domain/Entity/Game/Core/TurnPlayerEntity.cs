@@ -14,6 +14,11 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _subject = new Subject<TurnPlayer>();
         }
 
+        public IObservable<TurnPlayer> OnChangeAsObservable()
+        {
+            return _subject.Share();
+        }
+
         public void GameStart()
         {
             Current = TurnPlayer.Opponent;
