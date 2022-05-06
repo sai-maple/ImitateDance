@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3880151748082633492, guid: 150c8662c3b804f48a64f32cea76fa50, type: 3}
       propertyPath: m_Name
-      value: DownButton
+      value: DownButton Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7036948138841882374, guid: 150c8662c3b804f48a64f32cea76fa50, type: 3}
       propertyPath: _keyCode

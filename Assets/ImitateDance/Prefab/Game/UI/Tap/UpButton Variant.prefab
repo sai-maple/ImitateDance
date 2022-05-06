@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3880151748082633492, guid: 150c8662c3b804f48a64f32cea76fa50, type: 3}
       propertyPath: m_Name
-      value: TapButton
+      value: UpButton Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8051487498347983705, guid: 150c8662c3b804f48a64f32cea76fa50, type: 3}
       propertyPath: m_Pivot.x
