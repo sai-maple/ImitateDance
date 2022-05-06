@@ -38,13 +38,12 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Character
             switch (_phaseEntity.Current)
             {
                 case DancePhase.Dance:
+                case DancePhase.Audience:
                     _animationView.Dance(danceData.Dance, _turnPlayerEntity.Current);
                     break;
                 case DancePhase.Demo:
-                    _animationView.Dance(danceData.Demo, _turnPlayerEntity.Current);
-                    break;
-                case DancePhase.Audience:
                 case DancePhase.TurnChange:
+                    _animationView.Dance(danceData.Demo, _turnPlayerEntity.Current);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

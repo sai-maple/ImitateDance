@@ -29,14 +29,13 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
             switch (_phaseEntity.Current)
             {
                 case DancePhase.Dance:
+                case DancePhase.Audience:
                     var point = _scoreEntity.OnDance(_timeEntity.Time, direction);
                     _pointEntity.Add(_turnPlayerEntity.Current, point);
                     break;
                 case DancePhase.Demo:
-                    _scoreEntity.OnDemo(_timeEntity.Time, direction);
-                    break;
-                case DancePhase.Audience:
                 case DancePhase.TurnChange:
+                    _scoreEntity.OnDemo(_timeEntity.Time, direction);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

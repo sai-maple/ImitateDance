@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using ImitateDance.Scripts.Applications.Data;
@@ -41,8 +42,9 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             var score = JsonUtility.FromJson<ScoreDto>(textAsset.text);
             _score = score.Scores;
             _index = -1;
-            DanceTime = (60f / score.Bpm) * 7;
-            AudienceTime = 60f / score.Bpm;
+            var beetTime = 60f / score.Bpm;
+            DanceTime = beetTime * 7;
+            AudienceTime = beetTime * 1;
         }
 
         // 次のターンの譜面をセット

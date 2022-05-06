@@ -46,13 +46,12 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             switch (dancePhase)
             {
                 case DancePhase.Dance:
+                case DancePhase.Audience:
                     _demoLane.Dance(danceData.Beat, danceData.Demo, danceData.IsSuccess);
                     _dunceLane.Dance(danceData.Beat, danceData.Dance, danceData.IsSuccess);
                     break;
-                case DancePhase.Audience:
-                case DancePhase.TurnChange:
-                    break;
                 case DancePhase.Demo:
+                case DancePhase.TurnChange:
                     _demoLane.Dance(danceData.Beat, danceData.Demo, danceData.IsSuccess);
                     break;
                 default:
