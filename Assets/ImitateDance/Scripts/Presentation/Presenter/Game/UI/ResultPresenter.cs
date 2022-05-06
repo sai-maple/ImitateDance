@@ -32,12 +32,12 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
 
         public async void Initialize()
         {
-            PlayAudio(_cancellation.Token);
             _resultView.OnCloseAsObservable()
                 .Subscribe(_ => CloseAsync())
                 .AddTo(_disposable);
 
             await _resultView.PlayAsync(_pointEntity.Winner(), _cancellation.Token);
+            PlayAudio(_cancellation.Token);
         }
 
         private async void PlayAudio(CancellationToken token)
