@@ -46,6 +46,8 @@ namespace ImitateDance.Editor
             var beetTime = 60f / notes.BPM;
             // LPBは2固定
             var numTime = beetTime / 2f;
+            var offset = beetTime / 4f;
+            Debug.Log(offset);
             var score = notes.notes
                 .GroupBy(x => x.num / 16)
                 .Where(group => group.Key % 2 == 0)
@@ -53,7 +55,7 @@ namespace ImitateDance.Editor
                     new NotesDto(group.Select(note =>
                     {
                         var num = note.num % 16;
-                        return new NoteDto(num, num * numTime);
+                        return new NoteDto(num, num * numTime + offset);
                     }).ToList()))
                 .ToList();
             return new ScoreDto(score, notes.BPM);

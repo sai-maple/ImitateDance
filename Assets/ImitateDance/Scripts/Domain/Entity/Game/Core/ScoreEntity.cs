@@ -25,7 +25,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _noteSubject = new Subject<NoteData>();
             _demo = new Dictionary<int, DanceDirection>();
             _dunce = new Dictionary<int, DanceDirection>();
-            _offset = 0.1f;
+            _offset = 0.1667f;
         }
 
         public IObservable<NoteData> OnScoreAsObservable()

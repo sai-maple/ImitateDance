@@ -25,7 +25,6 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
 
         public void OnTap(DanceDirection direction)
         {
-            Logger.Log(direction);
             switch (_phaseEntity.Current)
             {
                 case DancePhase.Dance:
