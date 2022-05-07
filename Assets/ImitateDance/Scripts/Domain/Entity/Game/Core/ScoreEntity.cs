@@ -59,8 +59,8 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _cpuPower = difficulty switch
             {
                 MusicDifficulty.Easy => 2,
-                MusicDifficulty.Normal => 2.5f,
-                MusicDifficulty.Hard => 3,
+                MusicDifficulty.Normal => 2,
+                MusicDifficulty.Hard => 2,
                 _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
             };
         }

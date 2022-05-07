@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 8547540833130114244}
   - component: {fileID: 1800486489817949647}
   - component: {fileID: 1966730327424870817}
+  - component: {fileID: 174138089227071955}
   m_Layer: 5
   m_Name: Timeline
   m_TagString: Untagged
@@ -346,6 +347,19 @@ MonoBehaviour:
     TypeName: ImitateDance.Scripts.Applications.Installer.Common.RootInstaller
   autoRun: 1
   autoInjectGameObjects: []
+--- !u!114 &174138089227071955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681957855346050301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8514fb17103d410e8ff6049895773781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 1800486489817949647}
 --- !u!1 &7352913196753750916
 GameObject:
   m_ObjectHideFlags: 0
