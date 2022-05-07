@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using ImitateDance.Scripts.Domain.Entity.Common;
 using ImitateDance.Scripts.Domain.UseCase.Game.Core;
 using ImitateDance.Scripts.Presentation.View.Common;
@@ -33,6 +34,12 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
         public async void Initialize()
         {
             await _audioView.Load("Intro", _cancellation.Token);
+            if (_cancellation.IsCancellationRequested) return;
+
+            // 2.13でライトアップ完了 1.5で最後のライトがつく
+            await UniTask.Delay(TimeSpan.FromSeconds(1.5f), cancellationToken: _cancellation.Token);
+            if (_cancellation.IsCancellationRequested) return;
+
             _audioView.Play();
 
             // intro
