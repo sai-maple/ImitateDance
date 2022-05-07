@@ -50,7 +50,7 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
                     point = _scoreEntity.CpuDance(_timeEntity.Time);
                     break;
                 case DancePhase.Demo:
-                    point = _scoreEntity.OnDemo(_timeEntity.Time, DanceDirectionExtension.RandomOne());
+                    point = _scoreEntity.CPUDemo(_timeEntity.Time, DanceDirectionExtension.RandomOne());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

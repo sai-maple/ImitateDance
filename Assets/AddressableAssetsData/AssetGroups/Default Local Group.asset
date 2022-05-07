@@ -70,15 +70,27 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: f6092cbf79edf42a2b018f07fefc48a9
-    m_Address: Result
+    m_Address: GameMusicHard
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: d12cede3953fc46f9902dd3640f70b19
-    m_Address: Intro
+    m_Address: GameMusicNormal
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 88117387e679b43c7a712ac912ca3699
     m_Address: ScoreNormal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f986360be0c0a4baab62247771687eeb
+    m_Address: Intro
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a4418b695d0ec41f98676839e70bcc10
+    m_Address: Result
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b6e182132608461e8dd821f7b90ea7a
+    m_Address: ScoreHard
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

@@ -5,6 +5,7 @@ using ImitateDance.Scripts.Applications.Data;
 using ImitateDance.Scripts.Applications.Enums;
 using UniRx;
 using UnityEngine;
+using Logger = ImitateDance.Scripts.Applications.Common.Logger;
 using Random = UnityEngine.Random;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
@@ -19,6 +20,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         private NotesDto _score = default;
         private NotesDto _next = default;
         private int _provability = default;
+        private int _cpuPower = default;
         private int _index = default;
 
         public ScoreEntity()
@@ -53,6 +55,13 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 MusicDifficulty.Easy => 85,
                 MusicDifficulty.Normal => 90,
                 MusicDifficulty.Hard => 95,
+                _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
+            };
+            _cpuPower = difficulty switch
+            {
+                MusicDifficulty.Easy => 2,
+                MusicDifficulty.Normal => 3,
+                MusicDifficulty.Hard => 4,
                 _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
             };
         }
@@ -132,6 +141,22 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             return point;
         }
 
+        public int CPUDemo(float time, DanceDirection demo)
+        {
+            var point = 0;
+            foreach (var note in _score.Score)
+            {
+                if (note.Time > time) continue;
+                if (_demo.ContainsKey(note.Beat)) continue;
+                point = (int)(100 * (_offset - Random.Range(0, _offset / _cpuPower)));
+                _demo.Add(note.Beat, demo);
+                _dunceSubject.OnNext(new DanceData(note.Beat, demo));
+                break;
+            }
+
+            return point;
+        }
+
         public int CpuDance(float time)
         {
             var point = 0;
@@ -140,7 +165,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             {
                 if (note.Time > time) continue;
                 if (_dunce.ContainsKey(note.Beat)) continue;
-                point = (int)(100 * (_offset - Random.Range(0, _offset) / 2f));
+                point = (int)(100 * (_offset - Random.Range(0, _offset / _cpuPower)));
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
                 var direction = demo.CpuTap(_provability);
                 point = demo == (direction & demo) ? point : 0;
