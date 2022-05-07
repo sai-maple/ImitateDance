@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace ImitateDance.Scripts.Presentation.Presenter.Game.Intro
+namespace ImitateDance.Scripts.Presentation.View.Intro
 {
     public sealed class TextMakerView : Marker, INotification
     {

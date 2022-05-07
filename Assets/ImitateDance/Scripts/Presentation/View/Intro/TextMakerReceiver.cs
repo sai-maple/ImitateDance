@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace ImitateDance.Scripts.Presentation.Presenter.Game.Intro
+namespace ImitateDance.Scripts.Presentation.View.Intro
 {
     public sealed class TextMakerReceiver : MonoBehaviour, INotificationReceiver
     {
