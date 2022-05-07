@@ -24,35 +24,39 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
 
         public void OnTap(DanceDirection direction)
         {
+            var point = 0;
             switch (_phaseEntity.Current)
             {
                 case DancePhase.Dance:
-                    var point = _scoreEntity.OnDance(_timeEntity.Time, direction);
-                    _pointEntity.Add(_turnPlayerEntity.Current, point);
+                    point = _scoreEntity.OnDance(_timeEntity.Time, direction);
                     break;
                 case DancePhase.Demo:
-                    _scoreEntity.OnDemo(_timeEntity.Time, direction);
+                    point = _scoreEntity.OnDemo(_timeEntity.Time, direction);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            _pointEntity.Add(_turnPlayerEntity.Current, point);
         }
 
         public void CpuInput()
         {
             if (_turnPlayerEntity.Current == TurnPlayer.Self) return;
+            var point = 0;
             switch (_phaseEntity.Current)
             {
                 case DancePhase.Dance:
-                    var point = _scoreEntity.CpuDance(_timeEntity.Time);
-                    _pointEntity.Add(_turnPlayerEntity.Current, point);
+                    point = _scoreEntity.CpuDance(_timeEntity.Time);
                     break;
                 case DancePhase.Demo:
-                    _scoreEntity.OnDemo(_timeEntity.Time, DanceDirectionExtension.RandomOne());
+                    point = _scoreEntity.OnDemo(_timeEntity.Time, DanceDirectionExtension.RandomOne());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            _pointEntity.Add(_turnPlayerEntity.Current, point);
         }
     }
 }

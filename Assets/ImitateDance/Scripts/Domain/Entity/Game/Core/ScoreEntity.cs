@@ -50,9 +50,9 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _index = 0;
             _provability = difficulty switch
             {
-                MusicDifficulty.Easy => 60,
-                MusicDifficulty.Normal => 75,
-                MusicDifficulty.Hard => 90,
+                MusicDifficulty.Easy => 85,
+                MusicDifficulty.Normal => 90,
+                MusicDifficulty.Hard => 95,
                 _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
             };
         }
@@ -94,16 +94,21 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         }
 
         // 閾値以内のnoteに入力した方向をセットする
-        public void OnDemo(float time, DanceDirection demo)
+        public int OnDemo(float time, DanceDirection demo)
         {
+            var point = 0;
             foreach (var note in _score.Score)
             {
-                if (Mathf.Abs(note.Time - time) > _offset) continue;
+                var abs = Mathf.Abs(note.Time - time);
+                if (abs > _offset) continue;
                 if (_demo.ContainsKey(note.Beat)) continue;
+                point = (int)(100 * (_offset - abs / 2f));
                 _demo.Add(note.Beat, demo);
                 _dunceSubject.OnNext(new DanceData(note.Beat, demo));
                 break;
             }
+
+            return point;
         }
 
         // 閾値以内のnoteに入力した方向をセットして得点を返す
