@@ -1,18 +1,36 @@
 using System;
 using ImitateDance.Scripts.Applications.Common;
 using ImitateDance.Scripts.Applications.Enums;
+using UniRx;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 {
-    public sealed class PointEntity
+    public sealed class PointEntity : IDisposable
     {
-        private int _selfPoint = default;
-        private int _opponentPoint = default;
+        private readonly ReactiveProperty<int> _selfPoint = default;
+        private readonly ReactiveProperty<int> _opponentPoint = default;
+        private readonly Subject<TurnPlayer> _subject = default;
 
         public PointEntity()
         {
-            _selfPoint = 0;
-            _opponentPoint = 0;
+            _selfPoint = new ReactiveProperty<int>(0);
+            _opponentPoint = new ReactiveProperty<int>(0);
+            _subject = new Subject<TurnPlayer>();
+        }
+
+        public IObservable<int> OnSelfPointChangeAsObservable()
+        {
+            return _selfPoint;
+        }
+
+        public IObservable<int> OnOpponentPointChangeAsObservable()
+        {
+            return _opponentPoint;
+        }
+
+        public IObservable<TurnPlayer> OnBonusAsObservable()
+        {
+            return _subject.Share();
         }
 
         public void Add(TurnPlayer player, int point)
@@ -21,29 +39,29 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             switch (player)
             {
                 case TurnPlayer.Self:
-                    _selfPoint += point;
+                    _selfPoint.Value += point;
                     break;
                 case TurnPlayer.Opponent:
-                    _opponentPoint += point;
+                    _opponentPoint.Value += point;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(player), player, null);
             }
 
+            _subject.OnNext(player);
             Logger.Log($"self : {_selfPoint} , opponent :d {_opponentPoint}  {player}+{point}");
         }
 
         public void Bonus(TurnPlayer player, bool isPerfect)
         {
-            // todo ボーナスの計算
             if (!isPerfect) return;
             switch (player)
             {
                 case TurnPlayer.Self:
-                    _selfPoint += 10;
+                    _selfPoint.Value += 10;
                     break;
                 case TurnPlayer.Opponent:
-                    _opponentPoint += 10;
+                    _opponentPoint.Value += 10;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(player), player, null);
@@ -52,7 +70,14 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 
         public TurnPlayer Winner()
         {
-            return _selfPoint >= _opponentPoint ? TurnPlayer.Self : TurnPlayer.Opponent;
+            return _selfPoint.Value >= _opponentPoint.Value ? TurnPlayer.Self : TurnPlayer.Opponent;
+        }
+
+        public void Dispose()
+        {
+            _selfPoint.Dispose();
+            _opponentPoint.Dispose();
+            _subject?.Dispose();
         }
     }
 }

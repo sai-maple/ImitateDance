@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ImitateDance.Scripts.Applications.Common;
 using Random = UnityEngine.Random;
 
 namespace ImitateDance.Scripts.Applications.Enums

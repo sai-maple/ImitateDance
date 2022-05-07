@@ -134,6 +134,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 point = (int)(100 * (_offset - abs / 2f));
                 _dunce.Add(note.Beat, danceDirection);
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
+                point = danceDirection == (demo & danceDirection) ? point : 0;
                 _dunceSubject.OnNext(new DanceData(note.Beat, demo, danceDirection));
                 break;
             }
@@ -168,7 +169,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 point = (int)(100 * (_offset - Random.Range(0, _offset / _cpuPower)));
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
                 var direction = demo.CpuTap(_provability);
-                point = demo == (direction & demo) ? point : 0;
+                point = direction == (demo & direction) ? point : 0;
                 _dunce.Add(note.Beat, direction);
                 _dunceSubject.OnNext(new DanceData(note.Beat, demo, direction));
                 break;
