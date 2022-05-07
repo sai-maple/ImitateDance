@@ -14,6 +14,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
     {
         public float DanceTime { get; private set; }
         public float HalfBarTime { get; private set; }
+        public int Bpm { get; private set; }
         public NotesDto Score => _score[_index];
         public NotesDto Next => _index + 1 < _score.Count ? _score[_index + 1] : new NotesDto(new List<NoteDto>());
 
@@ -43,6 +44,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             var beetTime = 60f / score.Bpm;
             DanceTime = beetTime * 8;
             HalfBarTime = beetTime / 2;
+            Bpm = score.Bpm;
         }
 
         // 次のターンの譜面をセット

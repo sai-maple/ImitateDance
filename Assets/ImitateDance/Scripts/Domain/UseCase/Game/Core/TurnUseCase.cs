@@ -12,16 +12,19 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
         private readonly TimeEntity _timeEntity = default;
         private readonly MusicEntity _musicEntity = default;
         private readonly PointEntity _pointEntity = default;
+        private readonly SpeedEntity _speedEntity = default;
         private readonly TurnPlayerEntity _turnPlayerEntity = default;
 
-        public TurnUseCase(PhaseEntity phaseEntity, ScoreEntity scoreEntity,
-            TimeEntity timeEntity, MusicEntity musicEntity, PointEntity pointEntity, TurnPlayerEntity turnPlayerEntity)
+        public TurnUseCase(PhaseEntity phaseEntity, ScoreEntity scoreEntity, TimeEntity timeEntity,
+            MusicEntity musicEntity, PointEntity pointEntity, SpeedEntity speedEntity,
+            TurnPlayerEntity turnPlayerEntity)
         {
             _phaseEntity = phaseEntity;
             _scoreEntity = scoreEntity;
             _timeEntity = timeEntity;
             _musicEntity = musicEntity;
             _pointEntity = pointEntity;
+            _speedEntity = speedEntity;
             _turnPlayerEntity = turnPlayerEntity;
         }
 
@@ -29,6 +32,7 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
         // Audienceを挟む都合1拍遅れるので曲もずらす
         public void GameStart()
         {
+            _speedEntity.SetBpm(_musicEntity.Bpm);
             _turnPlayerEntity.GameStart();
             _phaseEntity.GameStart();
             _timeEntity.GameStart();

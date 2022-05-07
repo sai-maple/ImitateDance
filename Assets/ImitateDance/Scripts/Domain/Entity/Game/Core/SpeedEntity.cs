@@ -10,19 +10,21 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public float Speed => _speed.Value;
 
         private readonly float _tmp = default;
-        private float _current = default;
 
         public SpeedEntity()
         {
             _speed = new ReactiveProperty<float>(1);
             _tmp = 120;
-            _current = _tmp;
         }
 
-        public void SpeedUp()
+        public IObservable<float> OnChangeAsObservable()
         {
-            _current += 10;
-            _speed.Value = Mathf.Clamp(_current / _tmp, 1, 2);
+            return _speed;
+        }
+
+        public void SetBpm(int bpm)
+        {
+            _speed.Value = Mathf.Clamp(bpm / _tmp, 1, 2);
         }
 
         public void Dispose()
