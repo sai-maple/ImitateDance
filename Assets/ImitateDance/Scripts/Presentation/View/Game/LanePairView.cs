@@ -32,6 +32,21 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             }
         }
 
+        public void Hide(DancePhase phase)
+        {
+            switch (phase)
+            {
+                case DancePhase.Dance:
+                    _demoLane.HideAll();
+                    break;
+                case DancePhase.Demo:
+                    _dunceLane.HideAll();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(phase), phase, null);
+            }
+        }
+
         public void Play(DancePhase dancePhase, float normalizeLate)
         {
             switch (dancePhase)

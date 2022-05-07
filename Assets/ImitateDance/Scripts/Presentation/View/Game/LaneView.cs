@@ -30,6 +30,14 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             _currentLine.anchoredPosition = _position;
         }
 
+        public async void HideAll()
+        {
+            foreach (var noteView in _noteViews)
+            {
+                await noteView.Hide();
+            }
+        }
+
         public void UpdateNote(NoteData noteData)
         {
             if (noteData.Beat >= _noteViews.Count) return;

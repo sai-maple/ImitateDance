@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using ImitateDance.Scripts.Applications.Data;
 using ImitateDance.Scripts.Applications.Enums;
 using UnityEngine;
@@ -24,10 +26,19 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         public void SetDunce(NoteData noteData)
         {
             _emptyImage.enabled = !noteData.HasDirection;
-            _nonEmptyImage.enabled = noteData.HasDirection && noteData.Direction == DanceDirection.Non;
+            _nonEmptyImage.enabled = noteData.HasDirection && noteData.Direction.IsNon();
             _missImage.enabled = false;
-            var hash = noteData.Direction == DanceDirection.Non ? EmptyHash : Animator.StringToHash(noteData.Direction.ToString());
+            var hash = noteData.Direction.IsNon() ? EmptyHash : Animator.StringToHash(noteData.Direction.ToString());
             _directionAnimator.SetTrigger(hash);
+        }
+
+        public async UniTask Hide()
+        {
+            _emptyImage.enabled = false;
+            _nonEmptyImage.enabled = false;
+            _missImage.enabled = false;
+            _directionAnimator.SetTrigger(EmptyHash);
+            await UniTask.Delay(TimeSpan.FromMilliseconds(50));
         }
 
         public void Judge(DanceDirection dance, bool isSuccess)

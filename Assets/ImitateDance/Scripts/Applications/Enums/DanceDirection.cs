@@ -30,9 +30,14 @@ namespace ImitateDance.Scripts.Applications.Enums
 
         public static DanceDirection CpuTap(this DanceDirection direction)
         {
-            if (Directions.All(d => d == (d & direction))) RandomOne();
+            if (Directions.All(d => d == (d & direction))) return RandomOne();
 
             return Random.Range(0, 100) < 90 ? direction : RandomOne();
+        }
+
+        public static bool IsNon(this DanceDirection direction)
+        {
+            return Directions.All(d => d == (d & direction));
         }
     }
 }

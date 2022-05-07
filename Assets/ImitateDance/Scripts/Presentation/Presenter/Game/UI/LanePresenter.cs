@@ -37,6 +37,10 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
                 .Subscribe(note => _lanePairView.UpdateNote(_phaseEntity.Current, note))
                 .AddTo(_disposable);
 
+            _phaseEntity.OnChangeAsObservable()
+                .Subscribe(_lanePairView.Hide)
+                .AddTo(_disposable);
+
             Observable.EveryFixedUpdate()
                 .Subscribe(_ =>
                 {
