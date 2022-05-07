@@ -13,16 +13,18 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Character
         private readonly ScoreEntity _scoreEntity = default;
         private readonly TurnPlayerEntity _turnPlayerEntity = default;
         private readonly PhaseEntity _phaseEntity = default;
+        private readonly SpeedEntity _speedEntity = default;
         private readonly CharacterAnimationView _animationView = default;
 
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
         public CharacterAnimationPresenter(ScoreEntity scoreEntity, TurnPlayerEntity turnPlayerEntity,
-            PhaseEntity phaseEntity, CharacterAnimationView animationView)
+            PhaseEntity phaseEntity, SpeedEntity speedEntity, CharacterAnimationView animationView)
         {
             _scoreEntity = scoreEntity;
             _turnPlayerEntity = turnPlayerEntity;
             _phaseEntity = phaseEntity;
+            _speedEntity = speedEntity;
             _animationView = animationView;
         }
 
@@ -30,6 +32,10 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Character
         {
             _scoreEntity.OnDanceAsObservable()
                 .Subscribe(OnDance)
+                .AddTo(_disposable);
+
+            _speedEntity.OnChangeAsObservable()
+                .Subscribe(_animationView.SetSpeed)
                 .AddTo(_disposable);
         }
 

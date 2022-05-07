@@ -16,6 +16,11 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             _animator.SetTrigger(direction.ToString());
         }
 
+        public void SetSpeed(float speed)
+        {
+            _animator.speed = speed;
+        }
+
         public void Result(bool isWin)
         {
             _animator.SetTrigger(isWin ? WinHash : LoseHash);
