@@ -9,11 +9,12 @@ namespace ImitateDance.Scripts.Presentation.View.Game
 {
     public sealed class InputView : MonoBehaviour, IPointerDownHandler
     {
-        [SerializeField] private RectTransform _image = default;
+        [SerializeField] private Animator _animator = default;
         [SerializeField] private DanceDirection _direction = default;
         [SerializeField] private KeyCode _keyCode = default;
 
         private readonly Subject<DanceDirection> _subject = new Subject<DanceDirection>();
+        private static readonly int TapHash = Animator.StringToHash("Tap");
 
         public IObservable<DanceDirection> OnTapAsObservable()
         {
@@ -35,7 +36,7 @@ namespace ImitateDance.Scripts.Presentation.View.Game
 
         private void Fire()
         {
-            _image.DOShakeScale(0.3f, 1.1f);
+            _animator.SetTrigger(TapHash);
             _subject.OnNext(_direction);
         }
 
