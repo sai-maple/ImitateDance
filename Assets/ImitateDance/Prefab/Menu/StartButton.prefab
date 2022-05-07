@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 7502547095627706739}
   - component: {fileID: 9211150376571266087}
   - component: {fileID: 2647046523872913638}
+  - component: {fileID: 2844402030191261414}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -270,8 +271,8 @@ AudioSource:
   m_GameObject: {fileID: 7586798617734379017}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6860822041807519717, guid: 36062b8e11f4f418080d2e7721afa057, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 68913863b47d34ecfb6247073e38cc61, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -398,6 +399,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5060a0bfc12490e97e76e26567ca3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: ImitateDance.Scripts.Applications.Installer.Common.RootInstaller
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!114 &2844402030191261414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7586798617734379017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a953040372148d29ce0898f53367893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:

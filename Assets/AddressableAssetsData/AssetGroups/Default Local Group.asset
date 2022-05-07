@@ -85,12 +85,16 @@ MonoBehaviour:
     m_Address: Intro
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: a4418b695d0ec41f98676839e70bcc10
-    m_Address: Result
+  - m_GUID: a6237e82703524c7b96227bdb39989d4
+    m_Address: MainBgm
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 1b6e182132608461e8dd821f7b90ea7a
     m_Address: ScoreHard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9db66c812d5dd4aa5875fefdc78cb603
+    m_Address: Tutorial
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

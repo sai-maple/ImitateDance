@@ -42,7 +42,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
 
         private async void PlayAudio(CancellationToken token)
         {
-            await _audioView.Load("Result", token);
+            await _audioView.Load("MainBgm", token);
             _audioView.Play();
         }
 

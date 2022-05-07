@@ -8,6 +8,7 @@ namespace ImitateDance.Scripts.Presentation.View.Common
 {
     public sealed class AudioView : MonoBehaviour
     {
+        [SerializeField] private AssetReference _defaultAudio = default;
         [SerializeField] private AudioSource[] _audioSources = default;
         private AudioClip _clip = default;
         private float _volume = 1f;
@@ -19,6 +20,14 @@ namespace ImitateDance.Scripts.Presentation.View.Common
             {
                 audioSource.volume = 0;
             }
+
+            Addressables.LoadAssetAsync<AudioClip>(_defaultAudio).Completed += op =>
+            {
+                {
+                    _clip = op.Result;
+                    Play();
+                }
+            };
         }
 
         public async UniTask Load(string assetName, CancellationToken token)
@@ -37,7 +46,7 @@ namespace ImitateDance.Scripts.Presentation.View.Common
             _audioSources[_index].DOFade(_volume, 1);
         }
 
-        public async UniTask StopAsync(CancellationToken token)
+        public async UniTask StopAsync(CancellationToken token = default)
         {
             var current = _audioSources[_index];
             await current.DOFade(0, 1).OnComplete(() => current.Stop()).WithCancellation(token);
