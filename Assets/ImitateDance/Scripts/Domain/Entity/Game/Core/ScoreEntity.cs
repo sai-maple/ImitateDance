@@ -5,7 +5,6 @@ using ImitateDance.Scripts.Applications.Data;
 using ImitateDance.Scripts.Applications.Enums;
 using UniRx;
 using UnityEngine;
-using Logger = ImitateDance.Scripts.Applications.Common.Logger;
 using Random = UnityEngine.Random;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
@@ -19,6 +18,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         private readonly float _offset = default;
         private NotesDto _score = default;
         private NotesDto _next = default;
+        private int _provability = default;
         private int _index = default;
 
         public ScoreEntity()
@@ -41,13 +41,20 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             return _dunceSubject.Share();
         }
 
-        public void Initialize(NotesDto score, NotesDto next)
+        public void Initialize(NotesDto score, NotesDto next, MusicDifficulty difficulty)
         {
             _score = score;
             _next = next;
             _demo.Clear();
             _dunce.Clear();
             _index = 0;
+            _provability = difficulty switch
+            {
+                MusicDifficulty.Easy => 60,
+                MusicDifficulty.Normal => 75,
+                MusicDifficulty.Hard => 90,
+                _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
+            };
         }
 
         // demo dunceの中身を空の譜面にする
@@ -130,7 +137,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 if (_dunce.ContainsKey(note.Beat)) continue;
                 point = (int)(100 * (_offset - Random.Range(0, _offset) / 2f));
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
-                var direction = demo.CpuTap();
+                var direction = demo.CpuTap(_provability);
                 point = demo == (direction & demo) ? point : 0;
                 _dunce.Add(note.Beat, direction);
                 _dunceSubject.OnNext(new DanceData(note.Beat, demo, direction));

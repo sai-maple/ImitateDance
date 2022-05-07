@@ -29,7 +29,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.Core
         {
             // 譜面のロード　まで完了後 UIを呼び出す
             await _musicEntity.Initialize(_difficultyEntity.Value, _cancellation.Token);
-            _scoreEntity.Initialize(_musicEntity.Score, _musicEntity.Next);
+            _scoreEntity.Initialize(_musicEntity.Score, _musicEntity.Next, _difficultyEntity.Value);
             _screenContainer.Push("Intro", token: _cancellation.Token).Forget();
         }
     }
