@@ -1,5 +1,4 @@
 using System;
-using ImitateDance.Scripts.Applications.Common;
 using ImitateDance.Scripts.Applications.Enums;
 using ImitateDance.Scripts.Domain.Entity.Game.Core;
 
@@ -33,6 +32,23 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
                     break;
                 case DancePhase.Demo:
                     _scoreEntity.OnDemo(_timeEntity.Time, direction);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public void CpuInput()
+        {
+            if (_turnPlayerEntity.Current == TurnPlayer.Self) return;
+            switch (_phaseEntity.Current)
+            {
+                case DancePhase.Dance:
+                    var point = _scoreEntity.CpuDance(_timeEntity.Time);
+                    _pointEntity.Add(_turnPlayerEntity.Current, point);
+                    break;
+                case DancePhase.Demo:
+                    _scoreEntity.OnDemo(_timeEntity.Time, DanceDirectionExtension.RandomOne());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

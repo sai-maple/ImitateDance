@@ -5,6 +5,8 @@ using ImitateDance.Scripts.Applications.Data;
 using ImitateDance.Scripts.Applications.Enums;
 using UniRx;
 using UnityEngine;
+using Logger = ImitateDance.Scripts.Applications.Common.Logger;
+using Random = UnityEngine.Random;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 {
@@ -112,6 +114,26 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 _dunce.Add(note.Beat, danceDirection);
                 var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
                 _dunceSubject.OnNext(new DanceData(note.Beat, demo, danceDirection));
+                break;
+            }
+
+            return point;
+        }
+
+        public int CpuDance(float time)
+        {
+            var point = 0;
+            // _dunceの中身から判別するように変更する
+            foreach (var note in _score.Score)
+            {
+                if (note.Time > time) continue;
+                if (_dunce.ContainsKey(note.Beat)) continue;
+                point = (int)(100 * (_offset - Random.Range(0, _offset) / 2f));
+                var demo = _demo.ContainsKey(note.Beat) ? _demo[note.Beat] : DanceDirection.Non;
+                var direction = demo.CpuTap();
+                point = demo == (direction & demo) ? point : 0;
+                _dunce.Add(note.Beat, direction);
+                _dunceSubject.OnNext(new DanceData(note.Beat, demo, direction));
                 break;
             }
 

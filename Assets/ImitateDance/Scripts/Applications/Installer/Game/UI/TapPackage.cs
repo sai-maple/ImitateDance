@@ -1,4 +1,3 @@
-using ImitateDance.Scripts.Domain.UseCase.Game.Core;
 using ImitateDance.Scripts.Presentation.Presenter.Game.UI;
 using ImitateDance.Scripts.Presentation.View.Game;
 using UnityEngine;
@@ -12,7 +11,6 @@ namespace ImitateDance.Scripts.Applications.Installer.Game.UI
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<InputUseCase>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.RegisterEntryPoint<TapPresenter>();
             builder.RegisterComponent(GetComponent<InputView>());
         }

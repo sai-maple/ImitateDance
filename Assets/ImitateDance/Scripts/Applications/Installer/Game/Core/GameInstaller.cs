@@ -17,6 +17,7 @@ namespace ImitateDance.Scripts.Applications.Installer.Game.Core
             builder.Register<MusicEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<PointEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<TurnUseCase>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<InputUseCase>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.RegisterEntryPoint<TimePresenter>();
         }
     }

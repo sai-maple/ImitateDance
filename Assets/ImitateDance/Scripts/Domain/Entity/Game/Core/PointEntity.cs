@@ -1,4 +1,5 @@
 using System;
+using ImitateDance.Scripts.Applications.Common;
 using ImitateDance.Scripts.Applications.Enums;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
@@ -16,6 +17,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 
         public void Add(TurnPlayer player, int point)
         {
+            if (point == 0) return;
             switch (player)
             {
                 case TurnPlayer.Self:
@@ -27,6 +29,8 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                 default:
                     throw new ArgumentOutOfRangeException(nameof(player), player, null);
             }
+
+            Logger.Log($"self : {_selfPoint} , opponent :d {_opponentPoint}  {player}+{point}");
         }
 
         public void Bonus(TurnPlayer player, bool isPerfect)
@@ -36,10 +40,10 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             switch (player)
             {
                 case TurnPlayer.Self:
-                    _selfPoint += 100;
+                    _selfPoint += 10;
                     break;
                 case TurnPlayer.Opponent:
-                    _opponentPoint += 100;
+                    _opponentPoint += 10;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(player), player, null);
