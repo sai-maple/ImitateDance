@@ -5,7 +5,6 @@ using ImitateDance.Scripts.Applications.Data;
 using ImitateDance.Scripts.Applications.Enums;
 using UniRx;
 using UnityEngine;
-using Logger = ImitateDance.Scripts.Applications.Common.Logger;
 using Random = UnityEngine.Random;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
@@ -20,8 +19,8 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         private NotesDto _score = default;
         private NotesDto _next = default;
         private int _provability = default;
-        private int _cpuPower = default;
         private int _index = default;
+        private float _cpuPower = default;
 
         public ScoreEntity()
         {
@@ -60,8 +59,8 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _cpuPower = difficulty switch
             {
                 MusicDifficulty.Easy => 2,
-                MusicDifficulty.Normal => 3,
-                MusicDifficulty.Hard => 4,
+                MusicDifficulty.Normal => 2.5f,
+                MusicDifficulty.Hard => 3,
                 _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
             };
         }
