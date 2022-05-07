@@ -22,7 +22,11 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Common
         public void Initialize()
         {
             _screenButton.OnClickAsObservable()
-                .Subscribe(screen => _screenContainer.Push(screen).Forget())
+                .Subscribe(tuple =>
+                {
+                    var (screen, isOverride) = tuple;
+                    _screenContainer.Push(screen, isOverride).Forget();
+                })
                 .AddTo(_disposable);
         }
 

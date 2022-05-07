@@ -370,6 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screenName: Setting
+  isOverride: 1
 --- !u!114 &3810085061642786980
 MonoBehaviour:
   m_ObjectHideFlags: 0

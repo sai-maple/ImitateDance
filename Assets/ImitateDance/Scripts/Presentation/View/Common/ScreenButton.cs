@@ -9,6 +9,7 @@ namespace ImitateDance.Scripts.Presentation.View.Common
     public sealed class ScreenButton : MonoBehaviour
     {
         [SerializeField] private string _screenName = default;
+        [SerializeField] private bool isOverride = false;
         private Button _button = default;
 
         private void Awake()
@@ -20,12 +21,12 @@ namespace ImitateDance.Scripts.Presentation.View.Common
             _button.onClick.AddListener(() => audioSource.PlayOneShot(audioSource.clip));
         }
 
-        public IObservable<string> OnClickAsObservable()
+        public IObservable<(string, bool)> OnClickAsObservable()
         {
             _button = GetComponent<Button>();
             return _button.OnClickAsObservable()
                 .ThrottleFirst(TimeSpan.FromMilliseconds(500))
-                .Select(_ => _screenName);
+                .Select(_ => (_screenName, isOverride));
         }
     }
 }
