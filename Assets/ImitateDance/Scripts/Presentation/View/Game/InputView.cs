@@ -4,11 +4,13 @@ using ImitateDance.Scripts.Applications.Enums;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ImitateDance.Scripts.Presentation.View.Game
 {
     public sealed class InputView : MonoBehaviour, IPointerDownHandler
     {
+        [SerializeField] private Image _image = default;
         [SerializeField] private Animator _animator = default;
         [SerializeField] private DanceDirection _direction = default;
         [SerializeField] private KeyCode _keyCode = default;
@@ -27,6 +29,11 @@ namespace ImitateDance.Scripts.Presentation.View.Game
                 .TakeUntilDestroy(this)
                 .Where(_ => Input.GetKeyDown(_keyCode))
                 .Subscribe(_ => Fire());
+        }
+
+        public void Active(bool isAHide)
+        {
+            _image.gameObject.SetActive(!isAHide);
         }
 
         public void OnPointerDown(PointerEventData eventData)
