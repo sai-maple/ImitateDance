@@ -13,8 +13,8 @@ namespace ImitateDance.Scripts.Domain.Entity.Common
 
         public VolumeEntity()
         {
-            _se = new ReactiveProperty<float>(1);
-            _bgm = new ReactiveProperty<float>(1);
+            _se = new ReactiveProperty<float>(0.5f);
+            _bgm = new ReactiveProperty<float>(0.5f);
         }
 
         public IObservable<float> OnSeChangeAsObservable()
