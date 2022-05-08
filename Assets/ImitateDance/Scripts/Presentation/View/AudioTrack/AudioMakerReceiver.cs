@@ -36,6 +36,7 @@ namespace ImitateDance.Scripts.Presentation.View.AudioTrack
         private void OnDestroy()
         {
             _cancellation.Cancel();
+            _cancellation.Dispose();
         }
     }
 }
