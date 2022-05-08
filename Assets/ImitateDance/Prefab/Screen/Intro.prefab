@@ -218,6 +218,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 634582731362938245, guid: 05c943f811fb0451b865b4bc7f92bf4f, type: 2}
     value: {fileID: 1800486489817949647}
+  - key: {fileID: 1042617855529995599, guid: 05c943f811fb0451b865b4bc7f92bf4f, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 4588bde027e9048e1a66fc4980f729d6: {fileID: 8231854077524814589}
@@ -244,7 +246,7 @@ AudioSource:
   m_GameObject: {fileID: 2681957855346050301}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6860822041807519717, guid: 36062b8e11f4f418080d2e7721afa057, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

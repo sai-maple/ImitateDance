@@ -833,7 +833,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3221600136417385565}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.16023713
+  m_Size: 0.16023715
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3120,6 +3120,7 @@ GameObject:
   - component: {fileID: 6893611016763781936}
   - component: {fileID: 6894751157220207877}
   - component: {fileID: 4849248405668144081}
+  - component: {fileID: 1513649083785815376}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -3349,6 +3350,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a4bc7aa21444322834cced3ba45db86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: ImitateDance.Scripts.Applications.Installer.Common.RootInstaller
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!114 &1513649083785815376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494530245495651216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5060a0bfc12490e97e76e26567ca3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
