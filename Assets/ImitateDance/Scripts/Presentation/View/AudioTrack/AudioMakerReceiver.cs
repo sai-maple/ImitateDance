@@ -32,5 +32,10 @@ namespace ImitateDance.Scripts.Presentation.View.AudioTrack
             if (_cancellation.IsCancellationRequested) return;
             _audioSource.Stop();
         }
+
+        private void OnDestroy()
+        {
+            _cancellation.Cancel();
+        }
     }
 }
