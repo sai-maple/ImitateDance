@@ -58,8 +58,8 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             };
             _cpuPower = difficulty switch
             {
-                MusicDifficulty.Easy => 2,
-                MusicDifficulty.Normal => 2,
+                MusicDifficulty.Easy => 1,
+                MusicDifficulty.Normal => 1.5f,
                 MusicDifficulty.Hard => 2,
                 _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
             };
@@ -80,7 +80,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         }
 
         // dunce の判定範囲をすぎ分から、demoの譜面描画を更新する
-        public void UpdateDemo(float time, float halfBarTime)
+        public void UpdateDemo(double time, float halfBarTime)
         {
             if (halfBarTime * _index + _offset > time) return;
             var hasNote = _next.Score.Any(note => note.Beat == _index);
@@ -89,7 +89,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             _index++;
         }
 
-        public void UpdateDunce(float time, float halfBarTime)
+        public void UpdateDunce(double time, float halfBarTime)
         {
             if (halfBarTime * _index + _offset * 2 > time) return;
             var note = _score.Score.FirstOrDefault(note => note.Beat == _index);
@@ -102,12 +102,12 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         }
 
         // 閾値以内のnoteに入力した方向をセットする
-        public int OnDemo(float time, DanceDirection demo)
+        public int OnDemo(double time, DanceDirection demo)
         {
             var point = 0;
             foreach (var note in _score.Score)
             {
-                var abs = Mathf.Abs(note.Time - time);
+                var abs = Mathf.Abs(note.Time - (float)time);
                 if (abs > _offset) continue;
                 if (_demo.ContainsKey(note.Beat)) continue;
                 point = (int)(100 * (_offset - abs / 2f));
@@ -120,14 +120,14 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         }
 
         // 閾値以内のnoteに入力した方向をセットして得点を返す
-        public int OnDance(float time, DanceDirection danceDirection)
+        public int OnDance(double time, DanceDirection danceDirection)
         {
             var point = 0;
             // _dunceの中身から判別するように変更する
             foreach (var note in _score.Score)
             {
                 // todo threshold and point
-                var abs = Mathf.Abs(note.Time - time);
+                var abs = Mathf.Abs(note.Time - (float)time);
                 if (abs > _offset) continue;
                 if (_dunce.ContainsKey(note.Beat)) continue;
                 point = (int)(100 * (_offset - abs / 2f));
@@ -141,7 +141,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             return point;
         }
 
-        public int CPUDemo(float time, DanceDirection demo)
+        public int CPUDemo(double time, DanceDirection demo)
         {
             var point = 0;
             foreach (var note in _score.Score)
@@ -157,7 +157,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             return point;
         }
 
-        public int CpuDance(float time)
+        public int CpuDance(double time)
         {
             var point = 0;
             // _dunceの中身から判別するように変更する

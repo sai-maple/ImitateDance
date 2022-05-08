@@ -1,12 +1,16 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using ImitateDance.Scripts.Applications.Common;
 
 namespace ImitateDance.Scripts.Domain.Entity.Game.Core
 {
     public sealed class TimeEntity
     {
-        public float Time { get; private set; }
+        public double Time => _internalTime - _previousTime;
+        private double _previousTime = default;
+        private double _internalTime = default;
         private bool _startGame = default;
+        private int _count = default;
 
         public TimeEntity()
         {
@@ -16,16 +20,21 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public void GameStart()
         {
             _startGame = true;
+            _internalTime = 0;
+            _previousTime = 0;
+            _count = 0;
         }
 
         public async UniTask DanceAsync(float limit, CancellationToken token)
         {
-            Time = 0;
+            _previousTime = limit * _count;
+            _count++;
+            limit *= _count;
             while (true)
             {
                 await UniTask.Yield(PlayerLoopTiming.FixedUpdate, token);
                 if (token.IsCancellationRequested) return;
-                if (Time > limit) break;
+                if (_internalTime > limit) break;
             }
         }
 
@@ -33,7 +42,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public void FixUpdate(float deltaTime)
         {
             if (!_startGame) return;
-            Time += deltaTime;
+            _internalTime += deltaTime;
         }
     }
 }

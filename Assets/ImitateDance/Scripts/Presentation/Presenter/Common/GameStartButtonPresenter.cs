@@ -15,16 +15,18 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Common
         private readonly ScreenContainer _screenContainer = default;
         private readonly DifficultyEntity _difficultyEntity = default;
         private readonly DifficultyButton _difficultyButton = default;
+        private readonly AudioView _audioView = default;
 
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
         public GameStartButtonPresenter(ScreenContainer screenContainer, DifficultyEntity difficultyEntity,
-            DifficultyButton difficultyButton)
+            DifficultyButton difficultyButton, AudioView audioView)
         {
             _screenContainer = screenContainer;
             _difficultyEntity = difficultyEntity;
             _difficultyButton = difficultyButton;
+            _audioView = audioView;
         }
 
         public void Initialize()
@@ -39,6 +41,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Common
 
         private async void LoadSceneAsync(string canvasName, string screenName)
         {
+            _audioView.StopAsync().Forget();
             await _screenContainer.NewScreen(canvasName, token: _cancellation.Token);
             if (_cancellation.IsCancellationRequested) return;
             await _screenContainer.Push(screenName, token: _cancellation.Token);

@@ -34,8 +34,8 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
         {
             _speedEntity.SetBpm(_musicEntity.Bpm);
             _turnPlayerEntity.GameStart();
-            _phaseEntity.GameStart();
             _timeEntity.GameStart();
+            _phaseEntity.GameStart();
         }
 
         public async UniTask OnDance(CancellationToken token)
