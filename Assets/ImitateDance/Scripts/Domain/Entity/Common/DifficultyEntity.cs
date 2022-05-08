@@ -19,14 +19,9 @@ namespace ImitateDance.Scripts.Domain.Entity.Common
             return _property;
         }
 
-        public void Next()
+        public void Set(MusicDifficulty difficulty)
         {
-            _property.Value = _property.Value.Next();
-        }
-
-        public void Previous()
-        {
-            _property.Value = _property.Value.Previous();
+            _property.Value = difficulty;
         }
 
         public void Dispose()

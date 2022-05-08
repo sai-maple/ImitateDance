@@ -6,13 +6,13 @@ using VContainer.Unity;
 
 namespace ImitateDance.Scripts.Applications.Installer.Common
 {
-    [RequireComponent(typeof(DifficultyView))]
-    public sealed class DifficultyPackage : LifetimeScope
+    [RequireComponent(typeof(DifficultyButton))]
+    public sealed class GameStartButtonPackage : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<DifficultyPresenter>();
-            builder.RegisterComponent(GetComponent<DifficultyView>());
+            builder.RegisterEntryPoint<GameStartButtonPresenter>();
+            builder.RegisterComponent(GetComponent<DifficultyButton>());
         }
     }
 }

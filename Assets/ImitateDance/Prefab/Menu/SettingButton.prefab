@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u305B<size=25>\u3064</size>\u3066\u3044"
+  m_text: "\u305B\u3063\u3066\u3044"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9930faf78490c4557bcdba16fb211e13, type: 2}
   m_sharedMaterial: {fileID: 6073699009311448216, guid: 9930faf78490c4557bcdba16fb211e13, type: 2}
