@@ -14,25 +14,28 @@ namespace ImitateDance.Scripts.Presentation.View.Common
         private float _volume = 1f;
         private int _index = default;
 
-        private void Awake()
+        private async void Awake()
         {
             foreach (var audioSource in _audioSources)
             {
                 audioSource.volume = 0;
             }
 
-            Addressables.LoadAssetAsync<AudioClip>(_defaultAudio).Completed += op =>
-            {
-                {
-                    _clip = op.Result;
-                    Play();
-                }
-            };
+            // Addressables.LoadAssetAsync<AudioClip>(_defaultAudio).Completed += op =>
+            // {
+            //     {
+            //         _clip = op.Result;
+            //         Play();
+            //     }
+            // };
+            _clip = (AudioClip)await Resources.LoadAsync<AudioClip>("mainBgm");
+            Play();
         }
 
         public async UniTask Load(string assetName, CancellationToken token)
         {
-            _clip = await Addressables.LoadAssetAsync<AudioClip>(assetName).WithCancellation(token);
+            _clip = (AudioClip)await Resources.LoadAsync<AudioClip>(assetName).WithCancellation(token);
+            // _clip = await Addressables.LoadAssetAsync<AudioClip>(assetName).WithCancellation(token);
         }
 
         public void Play()

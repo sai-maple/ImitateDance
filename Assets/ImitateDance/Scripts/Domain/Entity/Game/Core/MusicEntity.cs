@@ -37,7 +37,8 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public async UniTask Initialize(MusicDifficulty difficulty, CancellationToken token = default)
         {
             // 最初Nextから呼ばれるので初期値は-1にする
-            var textAsset = await Addressables.LoadAssetAsync<TextAsset>($"Score{difficulty}").WithCancellation(token);
+            var textAsset = (TextAsset)await Resources.LoadAsync<TextAsset>($"Score{difficulty}").WithCancellation(token);
+            // var textAsset = await Addressables.LoadAssetAsync<TextAsset>($"Score{difficulty}").WithCancellation(token);
             var score = JsonUtility.FromJson<ScoreDto>(textAsset.text);
             _score = score.Scores;
             _index = 0;
