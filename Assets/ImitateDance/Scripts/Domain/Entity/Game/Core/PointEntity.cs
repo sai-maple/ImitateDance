@@ -11,6 +11,9 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         private readonly ReactiveProperty<int> _opponentPoint = default;
         private readonly Subject<TurnPlayer> _subject = default;
 
+        public int SelfPoint => _selfPoint.Value;
+        public int OpponentPoint => _opponentPoint.Value;
+
         public PointEntity()
         {
             _selfPoint = new ReactiveProperty<int>(0);

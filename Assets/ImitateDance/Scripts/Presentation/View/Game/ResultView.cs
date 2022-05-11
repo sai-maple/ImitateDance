@@ -8,6 +8,7 @@ using UniRx;
 using UniScreen.Extension;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 namespace ImitateDance.Scripts.Presentation.View.Game
 {
@@ -15,6 +16,8 @@ namespace ImitateDance.Scripts.Presentation.View.Game
     {
         [SerializeField] private PlayableDirector _winDirector = default;
         [SerializeField] private PlayableDirector _loseDirector = default;
+        [SerializeField] private PlayableDirector _resultDirector = default;
+        [SerializeField] private ResultSliderView _resultSliderView = default;
         [SerializeField] private CloseScreenButton _returnButton = default;
         [SerializeField] private CanvasGroup _returnButtonCanvas = default;
 
@@ -28,8 +31,17 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             return _returnButton.OnClickAsObservable();
         }
 
-        public async UniTask PlayAsync(TurnPlayer winner, CancellationToken token)
+        public async UniTask PlaySlider(int selfPoint, int opponentPoint, CancellationToken token)
         {
+            var tas1 = _resultDirector.PlayAsync(token);
+            var task2 = _resultSliderView.PlayIntroAsync(selfPoint, opponentPoint, token);
+
+            await UniTask.WhenAll(tas1, task2);
+        }
+
+        public async UniTask PlayAsync(int selfPoint, int opponentPoint, TurnPlayer winner, CancellationToken token)
+        {
+            _resultSliderView.SetResult(selfPoint, opponentPoint);
             var resultTask = winner == TurnPlayer.Self ? _winDirector.PlayAsync(token) : _loseDirector.PlayAsync(token);
             await resultTask;
             _returnButtonCanvas.DOFade(1, 0.5f);

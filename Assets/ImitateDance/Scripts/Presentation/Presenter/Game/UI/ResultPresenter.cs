@@ -36,7 +36,11 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
                 .Subscribe(_ => CloseAsync())
                 .AddTo(_disposable);
 
-            await _resultView.PlayAsync(_pointEntity.Winner(), _cancellation.Token);
+            await _resultView.PlaySlider(_pointEntity.SelfPoint, _pointEntity.OpponentPoint, _cancellation.Token);
+            if (_cancellation.IsCancellationRequested) return;
+
+            await _resultView.PlayAsync(_pointEntity.SelfPoint, _pointEntity.OpponentPoint, _pointEntity.Winner(),
+                _cancellation.Token);
             PlayAudio(_cancellation.Token);
         }
 
