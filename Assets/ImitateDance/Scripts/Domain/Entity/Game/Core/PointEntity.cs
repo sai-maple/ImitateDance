@@ -31,7 +31,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             return _opponentPoint;
         }
 
-        public IObservable<TurnPlayer> OnBonusAsObservable()
+        public IObservable<TurnPlayer> OnWinAsObservable()
         {
             return _subject.Share();
         }
@@ -71,15 +71,17 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             }
         }
 
-        public TurnPlayer Winner()
+        public TurnPlayer GetAndNext()
         {
-            return _selfPoint.Value >= _opponentPoint.Value ? TurnPlayer.Self : TurnPlayer.Opponent;
+            var winner = _selfPoint.Value >= _opponentPoint.Value ? TurnPlayer.Self : TurnPlayer.Opponent;
+            return winner;
         }
 
         public void Dispose()
         {
             _selfPoint.Dispose();
             _opponentPoint.Dispose();
+            _subject?.OnCompleted();
             _subject?.Dispose();
         }
     }

@@ -30,7 +30,7 @@ namespace ImitateDance.Scripts.Presentation.View.Intro
             if (_cancellation.IsCancellationRequested) return;
             await _text.DOText(element.Message, element.Message.Length * 0.05f).WithCancellation(_cancellation.Token);
             if (_cancellation.IsCancellationRequested) return;
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: _cancellation.Token);
+            await UniTask.Delay(TimeSpan.FromSeconds(element.Duration), cancellationToken: _cancellation.Token);
             if (_cancellation.IsCancellationRequested) return;
             _text.text = string.Empty;
             await _speech.DOScale(0, 0.2f).WithCancellation(_cancellation.Token);

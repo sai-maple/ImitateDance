@@ -41,7 +41,7 @@ namespace ImitateDance.Scripts.Presentation.View.Game
 
         public async UniTask PlayAsync(int selfPoint, int opponentPoint, TurnPlayer winner, CancellationToken token)
         {
-            _resultSliderView.SetResult(selfPoint, opponentPoint);
+            _resultSliderView.SetResult(selfPoint, opponentPoint, token);
             var resultTask = winner == TurnPlayer.Self ? _winDirector.PlayAsync(token) : _loseDirector.PlayAsync(token);
             await resultTask;
             _returnButtonCanvas.DOFade(1, 0.5f);

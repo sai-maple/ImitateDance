@@ -49,7 +49,7 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             await UniTask.WhenAll(task1, task2, task3, task4);
         }
 
-        public void SetResult(int selfPoint, int opponentPoint)
+        public async void SetResult(int selfPoint, int opponentPoint, CancellationToken token)
         {
             var selfPercent = (float)selfPoint / (selfPoint + opponentPoint);
             _selfSlider.value = selfPercent;
@@ -58,6 +58,9 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             _opponentPercent.text = $"{(1 - selfPercent) * 100:F1}%";
             _selfPoint.text = $"{selfPoint}pt";
             _opponentPoint.text = $"{opponentPoint}pt";
+            var task1 = _selfSlider.DOValue(selfPercent, 0.2f).ToUniTask(cancellationToken: token);
+            var task2 = _opponentSlider.DOValue(1 - selfPercent, 0.2f).ToUniTask(cancellationToken: token);
+            await UniTask.WhenAll(task1, task2);
         }
     }
 }
