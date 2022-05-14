@@ -50,10 +50,11 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
             _audioView.Play();
         }
 
-        private void CloseAsync()
+        private async void CloseAsync()
         {
+            await SceneManager.UnloadSceneAsync("GameScene").WithCancellation(_cancellation.Token);
+            if (_cancellation.IsCancellationRequested) return;
             _screenContainer.Close().Forget();
-            SceneManager.UnloadSceneAsync("GameScene");
         }
 
         public void Dispose()
