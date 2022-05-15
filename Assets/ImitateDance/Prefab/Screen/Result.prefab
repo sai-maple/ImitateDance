@@ -545,7 +545,6 @@ MonoBehaviour:
   _resultSliderView: {fileID: 2244884287343834274}
   _returnButton: {fileID: 7147165118706282898}
   _returnButtonCanvas: {fileID: 6388320799252840654}
-  _hide: {fileID: 0}
 --- !u!114 &7327066306089760001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1865,7 +1864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3391257704267424862
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2734,6 +2733,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 7242643155085619072, guid: 8ae0b72492574436795d0811c4b8ad7a, type: 2}
     value: {fileID: 7931214377646489639}
+  - key: {fileID: 7455546797990837645, guid: 8ae0b72492574436795d0811c4b8ad7a, type: 2}
+    value: {fileID: 2205832894511785604}
   m_ExposedReferences:
     m_References: []
 --- !u!82 &983511906252908753
@@ -5194,6 +5195,8 @@ GameObject:
   - component: {fileID: 7147165118706282898}
   - component: {fileID: 1193127230848769803}
   - component: {fileID: 6388320799252840654}
+  - component: {fileID: 2972848108341670957}
+  - component: {fileID: 8515067042604757553}
   m_Layer: 5
   m_Name: ReturnButton
   m_TagString: Untagged
@@ -5440,6 +5443,44 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!223 &2972848108341670957
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283144221255557249}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &8515067042604757553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283144221255557249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7499139928532311424
 GameObject:
   m_ObjectHideFlags: 0

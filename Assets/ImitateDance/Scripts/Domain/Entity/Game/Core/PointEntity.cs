@@ -31,7 +31,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
             return _opponentPoint;
         }
 
-        public IObservable<TurnPlayer> OnWinAsObservable()
+        public IObservable<TurnPlayer> OnWinnerAsObservable()
         {
             return _subject.Share();
         }
@@ -51,7 +51,6 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
                     throw new ArgumentOutOfRangeException(nameof(player), player, null);
             }
 
-            _subject.OnNext(player);
             Logger.Log($"self : {_selfPoint} , opponent :d {_opponentPoint}  {player}+{point}");
         }
 
@@ -74,6 +73,7 @@ namespace ImitateDance.Scripts.Domain.Entity.Game.Core
         public TurnPlayer GetAndNext()
         {
             var winner = _selfPoint.Value >= _opponentPoint.Value ? TurnPlayer.Self : TurnPlayer.Opponent;
+            _subject.OnNext(winner);
             return winner;
         }
 

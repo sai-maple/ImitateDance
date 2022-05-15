@@ -9,6 +9,7 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         [SerializeField] private TurnPlayer _selfTurn = default;
         private static readonly int WinHash = Animator.StringToHash("Win");
         private static readonly int LoseHash = Animator.StringToHash("Lose");
+        private static readonly int FinishHash = Animator.StringToHash("Finish");
 
         public void Dance(DanceDirection direction, TurnPlayer turnPlayer)
         {
@@ -21,9 +22,14 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             _animator.speed = speed;
         }
 
-        public void Result(bool isWin)
+        public void Finish()
         {
-            _animator.SetTrigger(isWin ? WinHash : LoseHash);
+            _animator.SetTrigger(FinishHash);
+        }
+
+        public void Result(TurnPlayer winner)
+        {
+            _animator.SetTrigger(winner == _selfTurn ? WinHash : LoseHash);
         }
     }
 }

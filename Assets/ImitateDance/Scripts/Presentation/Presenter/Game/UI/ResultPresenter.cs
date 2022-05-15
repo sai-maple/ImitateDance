@@ -36,6 +36,9 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
                 .Subscribe(_ => CloseAsync())
                 .AddTo(_disposable);
 
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: _cancellation.Token);
+            if (_cancellation.IsCancellationRequested) return;
+
             await _resultView.PlaySlider(_pointEntity.SelfPoint, _pointEntity.OpponentPoint, _cancellation.Token);
             if (_cancellation.IsCancellationRequested) return;
 
