@@ -6,13 +6,13 @@ using VContainer.Unity;
 
 namespace ImitateDance.Scripts.Applications.Installer.Game.UI
 {
-    [RequireComponent(typeof(AudienceView))]
+    [RequireComponent(typeof(AudienceAreaView))]
     public sealed class AudiencePackage : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<AudiencePresenter>();
-            builder.RegisterComponent(GetComponent<AudienceView>());
+            builder.RegisterComponent(GetComponent<AudienceAreaView>());
         }
     }
 }

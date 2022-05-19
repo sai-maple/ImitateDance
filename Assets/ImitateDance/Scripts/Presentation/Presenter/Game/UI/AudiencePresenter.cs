@@ -13,36 +13,46 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
         private readonly PointEntity _pointEntity = default;
         private readonly SpeedEntity _speedEntity = default;
         private readonly DifficultyEntity _difficultyEntity = default;
-        private readonly AudienceView _audienceView = default;
+        private readonly MusicEntity _musicEntity = default;
+        private readonly AudienceAreaView _audienceView = default;
 
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
-        private float _threshold = 0;
-
         public AudiencePresenter(PointEntity pointEntity, SpeedEntity speedEntity, DifficultyEntity difficultyEntity,
-            AudienceView audienceView)
+            MusicEntity musicEntity, AudienceAreaView audienceView)
         {
             _pointEntity = pointEntity;
             _speedEntity = speedEntity;
             _difficultyEntity = difficultyEntity;
+            _musicEntity = musicEntity;
             _audienceView = audienceView;
         }
 
         public void Initialize()
         {
-            _threshold = _difficultyEntity.Value switch
+            var threshold = _difficultyEntity.Value switch
             {
-                MusicDifficulty.Easy => 200,
-                MusicDifficulty.Normal => 600,
-                MusicDifficulty.Hard => 900,
+                MusicDifficulty.Easy => 15,
+                MusicDifficulty.Normal => 35,
+                MusicDifficulty.Hard => 50,
                 _ => throw new ArgumentOutOfRangeException()
             };
+            _audienceView.Initialize(threshold);
+
             _pointEntity.OnSelfPointChangeAsObservable()
-                .Subscribe(point => _audienceView.SetSelfPointNormalize(point / _threshold))
+                .Subscribe(self => _audienceView.ChangePointSelf(self, _pointEntity.OpponentPoint))
                 .AddTo(_disposable);
 
             _pointEntity.OnOpponentPointChangeAsObservable()
-                .Subscribe(point => _audienceView.SetOpponentPointNormalize(point / _threshold))
+                .Subscribe(opponent => _audienceView.ChangePointOpponent(_pointEntity.SelfPoint, opponent))
+                .AddTo(_disposable);
+
+            _pointEntity.OnWinnerAsObservable()
+                .Subscribe(_audienceView.Result)
+                .AddTo(_disposable);
+
+            _musicEntity.OnFinishAsObservable()
+                .Subscribe(_ => _audienceView.Finish())
                 .AddTo(_disposable);
 
             _speedEntity.OnChangeAsObservable()
