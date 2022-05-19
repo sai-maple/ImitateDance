@@ -13,7 +13,6 @@ namespace ImitateDance.Scripts.Presentation.View.Game
         [SerializeField] private Image _image = default;
         [SerializeField] private Animator _animator = default;
         [SerializeField] private DanceDirection _direction = default;
-        [SerializeField] private KeyCode _keyCode = default;
 
         private readonly Subject<DanceDirection> _subject = new Subject<DanceDirection>();
         private static readonly int TapHash = Animator.StringToHash("Tap");
@@ -23,17 +22,13 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             return _subject.Share();
         }
 
-        private void Awake()
+        public void Initialize(KeyCode keyCode, bool isHide)
         {
             Observable.EveryUpdate()
                 .TakeUntilDestroy(this)
-                .Where(_ => Input.GetKeyDown(_keyCode))
+                .Where(_ => Input.GetKeyDown(keyCode))
                 .Subscribe(_ => Fire());
-        }
-
-        public void Active(bool isAHide)
-        {
-            _image.gameObject.SetActive(!isAHide);
+            _image.gameObject.SetActive(!isHide);
         }
 
         public void OnPointerDown(PointerEventData eventData)
