@@ -13,8 +13,8 @@ namespace ImitateDance.Scripts.Presentation.View.Common
         [SerializeField] private Toggle _toggle = default;
         [SerializeField] private AudioSource _audioSource = default;
 
-        private const string HideMessage = "隠し中";
-        private const string DisplayMessage = "表示中";
+        private const string HideMessage = "かくしちゅう";
+        private const string DisplayMessage = "ひょうじちゅう";
 
         public IObservable<bool> OnChangeAsObservable()
         {

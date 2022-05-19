@@ -34,15 +34,7 @@ namespace ImitateDance.Scripts.Presentation.Presenter.Game.UI
 
         public void Initialize()
         {
-            var key = _direction switch
-            {
-                DanceDirection.Non => _keyConfigEntity.Up,
-                DanceDirection.Up => _keyConfigEntity.Up,
-                DanceDirection.Down => _keyConfigEntity.Down,
-                DanceDirection.Right => _keyConfigEntity.Right,
-                DanceDirection.Left => _keyConfigEntity.Left,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            var key = _keyConfigEntity.GetKey(_direction);
             _inputView.Initialize(key, _hideButtonEntity.IsHide);
             _inputView.OnTapAsObservable()
                 .Where(_ => _turnPlayerEntity.Current == TurnPlayer.Self)
