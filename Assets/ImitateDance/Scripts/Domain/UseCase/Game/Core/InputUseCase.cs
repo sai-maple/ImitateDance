@@ -1,5 +1,6 @@
 using System;
 using ImitateDance.Scripts.Applications.Enums;
+using ImitateDance.Scripts.Domain.Entity.Common;
 using ImitateDance.Scripts.Domain.Entity.Game.Core;
 
 namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
@@ -10,15 +11,17 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
         private readonly TimeEntity _timeEntity = default;
         private readonly PhaseEntity _phaseEntity = default;
         private readonly PointEntity _pointEntity = default;
+        private readonly TimingConfigEntity _timingConfigEntity = default;
         private readonly TurnPlayerEntity _turnPlayerEntity = default;
 
         public InputUseCase(ScoreEntity scoreEntity, TimeEntity timeEntity, PhaseEntity phaseEntity,
-            PointEntity pointEntity, TurnPlayerEntity turnPlayerEntity)
+            PointEntity pointEntity, TimingConfigEntity timingConfigEntity, TurnPlayerEntity turnPlayerEntity)
         {
             _scoreEntity = scoreEntity;
             _timeEntity = timeEntity;
             _phaseEntity = phaseEntity;
             _pointEntity = pointEntity;
+            _timingConfigEntity = timingConfigEntity;
             _turnPlayerEntity = turnPlayerEntity;
         }
 
@@ -28,10 +31,10 @@ namespace ImitateDance.Scripts.Domain.UseCase.Game.Core
             switch (_phaseEntity.Current)
             {
                 case DancePhase.Dance:
-                    point = _scoreEntity.OnDance(_timeEntity.Time, direction);
+                    point = _scoreEntity.OnDance(_timeEntity.Time + _timingConfigEntity.Value, direction);
                     break;
                 case DancePhase.Demo:
-                    point = _scoreEntity.OnDemo(_timeEntity.Time, direction);
+                    point = _scoreEntity.OnDemo(_timeEntity.Time + _timingConfigEntity.Value, direction);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

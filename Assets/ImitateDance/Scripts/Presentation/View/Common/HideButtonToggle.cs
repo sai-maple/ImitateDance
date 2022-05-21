@@ -25,11 +25,11 @@ namespace ImitateDance.Scripts.Presentation.View.Common
         {
             _toggle.isOn = isOn;
             _text.text = isOn ? HideMessage : DisplayMessage;
-            _image.color = isOn ? Color.red : Color.cyan;
+            _image.color = isOn ? new Color(1f, 0.56f, 0.45f) : new Color(0.58f, 1f, 0.89f);
             _toggle.onValueChanged.AddListener(on =>
             {
                 _text.text = on ? HideMessage : DisplayMessage;
-                _image.color = on ? Color.red : Color.cyan;
+                _image.color = on ? new Color(1f, 0.56f, 0.45f) : new Color(0.58f, 1f, 0.89f);
                 _audioSource.PlayOneShot(_audioSource.clip);
             });
         }

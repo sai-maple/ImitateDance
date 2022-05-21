@@ -20,6 +20,7 @@ namespace ImitateDance.Scripts.Applications.Installer.Common
             builder.Register<VolumeEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<HideButtonEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<KeyConfigEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<TimingConfigEntity>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }
     }
 }
