@@ -44,7 +44,7 @@ namespace ImitateDance.Scripts.Presentation.View.Game
             _resultSliderView.SetResult(selfPoint, opponentPoint, token);
             var resultTask = winner == TurnPlayer.Self ? _winDirector.PlayAsync(token) : _loseDirector.PlayAsync(token);
             await resultTask;
-            _returnButtonCanvas.DOFade(1, 0.5f);
+            _returnButtonCanvas.DOFade(1, 0.5f).WithCancellation(token).Forget();
         }
     }
 }
