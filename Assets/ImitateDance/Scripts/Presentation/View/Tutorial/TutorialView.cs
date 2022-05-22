@@ -25,7 +25,6 @@ namespace ImitateDance.Scripts.Presentation.View.Tutorial
             _speech.localScale = Vector3.zero;
             _text.text = "";
             _nextImage.enabled = false;
-            _nextButton.onClick.AddListener(() => _audioSource.PlayOneShot(_audioClip));
         }
 
         public async UniTask PlayAsync(CancellationToken token)
@@ -75,6 +74,7 @@ namespace ImitateDance.Scripts.Presentation.View.Tutorial
             var nextEvent = _nextButton.onClick.GetAsyncEventHandler(CancellationToken.None);
             await nextEvent.OnInvokeAsync();
             if (token.IsCancellationRequested) return;
+            _audioSource.PlayOneShot(_audioClip);
             _nextImage.enabled = true;
         }
     }
